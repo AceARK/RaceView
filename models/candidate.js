@@ -19,11 +19,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   },
-    // To create an association between Users and Players
+    // To create an association between Candidates and Votes
     {
       classMethods: {
         associate: function(models) {
-          // User has many Player data
+          // Candidate has many Votes data
           Candidate.hasMany(models.Vote);
         }
       }

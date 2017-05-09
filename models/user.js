@@ -29,11 +29,11 @@ module.exports = function(sequelize, DataTypes) {
       isIn: [['admin', 'user']]
     }
   },
-    // To create an association between Users and Players
+    // To create an association between Users and Votes
     {
       classMethods: {
         associate: function(models) {
-          // User has many Player data
+          // User has only one vote data
           User.hasOne(models.Vote);
         }
       }
