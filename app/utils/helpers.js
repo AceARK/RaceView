@@ -18,22 +18,24 @@ var helpers = {
 		console.log("Getting candidate list");
 		return axios.get("/candidates/all").then(function(result){
       		console.log("AXIOS GET CANDIDATES RESULTS", result);
-      		// return result;
+      		return result;
     	});
 	},
 
 	// Add a candidate
 	addCandidate: function(candidateData) {
 		console.log("Adding candidate");
+		// candidateData - json object with name, photoSrc, and party
 		return axios.post("/add/candidate", candidateData).then(function(result) {
 			console.log("CANDIDATE ADDED", result);
-			// return result;
+			return result;
 		});
 	},
 
 	// Delete a candidate
 	deleteCandidate: function(candidateData) {
 		console.log("Deleting candidate");
+		// candidateData - json object with candidateId
 		return axios.delete("/delete/candidate", candidateData).then(function(result) {
 			console.log("DELETED CANDIDATE", result);
 			// return result;
@@ -45,15 +47,17 @@ var helpers = {
 	// Adding a user
 	addUser: function(userData) {
 		console.log("Adding user");
+		// userData - json object with username, email, password
 		return axios.post("/add/user", userData).then(function(result) {
 			console.log("ADDING USER", result);
-			// return result;
+			return result;
 		});
 	},
 
 	// Delete a user
 	deleteUser: function(userData) {
 		console.log("Deleting user account");
+		// userData - json object with userId
 		return axios.delete("/delete/user", userData).then(function(result) {
 			console.log("DELETED USER", result);
 			// return result;
@@ -63,6 +67,7 @@ var helpers = {
 	// Authenticate user
 	authenticateUser: function(userData) {
 		console.log("Authenticating user");
+		// userData - json object with email and password
 		return axios.post("/authenticate", userData).then(function(result) {
 			console.log("AUTHENTICATED USER", result);
 			// return result;
@@ -72,6 +77,7 @@ var helpers = {
 	// Changing user password
 	changePassword: function(userData) {
 		console.log("Changing user password");
+		// TODO: will have user's email and new password
 		return axios.post("/change/password", userData).then(function(result) {
 			console.log("PASSWORD SUCCESSFULLY CHANGED", result);
 			// return result;
@@ -83,27 +89,30 @@ var helpers = {
 	// Adding user vote
 	addVoteByUser: function(voteData) {
 		console.log("Adding user vote");
-		return axios.post("/vote").then(function(result) {
+		// voteData - json object with userId and candidateId
+		return axios.post("/vote", voteData).then(function(result) {
 			console.log("ADDED USER VOTE", result);
-			// return result;
+			return result;
 		});
 	},
 
 	// Get all votes for a candidate
 	getVotesPerCandidate: function(candidateData) {
 		console.log("Getting candidate votes");
+		// candidateData - json object with candidateId
 		return axios.get("/candidate/votes", candidateData).then(function(result) {
 			console.log("CANDIDATE VOTES", result);
-			// return result;
+			return result;
 		});
 	},
 
 	// Delete a candidate
 	deleteVotesForCandidate: function(candidateData) {
 		console.log("Deleting candidate votes");
+		// candidateData - json object with candidateId
 		return axios.delete("/delete/candidate/votes", candidateData).then(function(result) {
 			console.log("DELETED VOTES FOR CANDIDATE", result);
-			// return result;
+			return result;
 		});
 	},
 
@@ -112,7 +121,7 @@ var helpers = {
 		console.log("Deleting all candidate votes");
 		return axios.delete("/delete/votes").then(function(result) {
 			console.log("DELETED ALL CANDIDATE VOTES", result);
-			// return result;
+			return result;
 		});
 	}
 }
