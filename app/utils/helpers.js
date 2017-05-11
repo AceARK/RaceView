@@ -96,6 +96,15 @@ var helpers = {
 		});
 	},
 
+	// Getting vote for all candidates
+	getAllVotes: function() {
+		console.log("Getting all votes for all candidate");
+		return axios.get("/votes/all").then(function(result) {
+			console.log("ALL CANDIDATES VOTES", result);
+			return result;
+		});
+	},
+
 	// Get all votes for a candidate
 	getVotesPerCandidate: function(candidateData) {
 		console.log("Getting candidate votes");

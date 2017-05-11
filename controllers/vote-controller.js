@@ -28,7 +28,7 @@ module.exports = function(app) {
 		db.Vote.findAll({
 			attributes: ['votes'],
 			where: {
-				CandidateId: req.body.candidateId,
+				CandidateId: req.params.candidateId,
 				voted_flag: 1
 			}
 		}).then(function(response) {
@@ -44,12 +44,18 @@ module.exports = function(app) {
 	app.get("/votes/all", function(req, res) {
 		// TODO: Get votes for all candidates
 		// Maybe something resembling ->
-		/*
-		User.findAll({
-		  attributes: ['User.*', 'Post.*', [sequelize.fn('COUNT', sequelize.col('Post.id')), 'PostCount']],
-		  include: [Post]
-		}
-		*/
+		
+		db.Vote.findAll({
+		  attributes: ['CandidateId', [db.sequelize.fn('COUNT', db.sequelize.col('CandidateId')), 'VoteCount']], 
+		  group: 'CandidateId'
+		}).then(function(response) {
+			console.log(response);
+			res.send(response);
+		}).catch(function(error) {
+			console.log(error);
+			res.send(error);
+		});
+		
 	});
 
 	// Delete candidate votes
