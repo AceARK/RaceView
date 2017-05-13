@@ -25,18 +25,17 @@ module.exports = function(app) {
 
 	// Get votes per candidate
 	app.get("/candidate/votes", function(req, res) {
+		// console.log(req.query.ID);
 		db.Vote.findAll({
 			attributes: ['votes'],
 			where: {
-				CandidateId: req.params.candidateId,
+				CandidateId: req.query.ID,
 				voted_flag: 1
 			}
 		}).then(function(response) {
-			console.log(response);
-			response.reduce((a,b) => {return (a + b)});
+			// console.log(response.length);
 			var voteCount = response.length;
-			console.log(voteCount);
-			res.send(voteCount);
+			res.json(voteCount);
 		});
 	});
 

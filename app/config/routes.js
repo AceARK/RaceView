@@ -18,7 +18,7 @@ var IndexRoute = router.IndexRoute;
 
 // Reference high-level components
 var Main = require("../components/Main");
-var Dashboard = require("../components/Dashboard");
+var DashboardPage = require("../components/DashboardPage");
 var PopularityDiv = require("../components/PopularityDiv");
 var UserPortal = require("../components/UserPortal");
 var Error404 = require("../components/Error404");
@@ -29,9 +29,10 @@ module.exports = (
   // The high level component is the Router component
   <Router history={browserHistory}>
     {/* Routing for Main component */}
-    <Route path="/" component={Main} />
-      <IndexRoute component={Dashboard} />
+    <Route path="/" component={Main}>
+      <IndexRoute component={DashboardPage} />
       <Route path="/vote" component={UserPortal} />
+    </Route>
     <Route path="*" component={Error404} />
   </Router>
 );

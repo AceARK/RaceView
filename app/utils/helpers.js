@@ -106,11 +106,11 @@ var helpers = {
 	},
 
 	// Get all votes for a candidate
-	getVotesPerCandidate: function(candidateData) {
-		console.log("Getting candidate votes");
+	getVotesPerCandidate: function(candidateId) {
+		console.log("Getting candidate votes for id : " + candidateId);
 		// candidateData - json object with candidateId
-		return axios.get("/candidate/votes", candidateData).then(function(result) {
-			console.log("CANDIDATE VOTES", result);
+		return axios.get("/candidate/votes", {params: { ID: candidateId }}).then(function(result) {
+			// console.log("CANDIDATE VOTES", result);
 			return result;
 		});
 	},

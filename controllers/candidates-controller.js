@@ -10,7 +10,7 @@ module.exports = function(app) {
 	// Get all candidates
 	app.get("/candidates/all", function(req, res) {
 		db.Candidate.findAll().then(function(response) {
-			console.log(response);
+			// console.log(response);
 			res.send(response);
 		}).catch(function(error) {
 			console.log(error);

@@ -22,10 +22,10 @@ class Dashboard extends React.Component {
 			<div className="container">
 				<h1 className="text-center">Dashboard</h1>
 				<div className="row">
-					<div className="col-sm-6">
+					<div className="col-sm-7">
 						<TabularGraphPanel />
 					</div>
-					<div className="col-sm-6">
+					<div className="col-sm-5">
 						<TileSet />
 					</div>
 				</div>

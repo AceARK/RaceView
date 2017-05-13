@@ -1,12 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import Dashboard from './Dashboard.js';
-import TileSet from './TileSet.js';
-import Tile from './Tile.js';
-import TabularGraphPanel from './TabularGraphPanel.js';
-import PopularityDiv from './PopularityDiv.js';
-
 class Main extends React.Component {
 	constructor(props) {
 		super(props);
@@ -20,22 +14,23 @@ class Main extends React.Component {
 
 	render() {
 		return (
-			<div className="container">
+			<div>
 				<nav className="navbar navbar-default">
-				  <div className="container-fluid">
+				  <div className="container">
 				    <div className="navbar-header">
 				      <a className="navbar-brand" href="/">RaceView</a>
-				      <div className="navbar-nav navbar-right">
-				      	<ul className="list-inline">
-							<li><Link to="/">Dashboard</Link></li>
-							<li><Link to="/vote">Vote</Link></li>
-						</ul>
-				      </div>
 				    </div>
+				    
+			      	<ul className="nav navbar-nav navbar-right">
+						<li><Link to="/">Dashboard</Link></li>
+						<li><Link to="/vote">Vote</Link></li>
+					</ul>
+				   
 				  </div>
 				</nav>
-				<Dashboard />
-				<PopularityDiv />
+				<div className="container-fluid">
+					{this.props.children}
+				</div>
 			</div>
 		);
 	}

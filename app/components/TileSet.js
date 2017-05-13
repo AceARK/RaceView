@@ -26,50 +26,56 @@ var TileSet = React.createClass ({
 	componentDidMount: function() {
 		console.log("SHORTY DID MOUNT YO");
 		var tempCandidatesArray = [];
+		// var componentThis = this;
 		// Get list of candidates in array format
 		helpers.getCandidateList().then(function(result) {
-			console.log(result);
+			// console.log(result);
 			// var tempCandidatesArray = [];
 			result.data.forEach((candidate) => {
 				var candidateId = candidate.id;
 				var candidateName = candidate.name;
 				var candidatePhotoSrc = candidate.photoSrc;
 				var candidateParty = candidate.party;
-				var candidateObject = {
-					id: candidateId,
-					name: candidateName,
-					photoSrc: candidatePhotoSrc,
-					party: candidateParty
-				};
-				console.log(candidateObject);
-				tempCandidatesArray.push(candidateObject);
-				console.log(tempCandidatesArray);
+				helpers.getVotesPerCandidate(candidateId).then(function(voteData) {
+					// console.log(voteData);
+					var candidateVotes = voteData.data;
+					var candidateObject = {
+						id: candidateId,
+						name: candidateName,
+						photoSrc: candidatePhotoSrc,
+						party: candidateParty,
+						votes: candidateVotes
+					};
+					console.log(candidateObject);
+					tempCandidatesArray.push(candidateObject);
+					console.log(tempCandidatesArray);
+
+					this.setState({
+						candidatesArray: tempCandidatesArray
+					});
+				}.bind(this));
 			});
 
-			this.setState({
-				candidatesArray: tempCandidatesArray
-			});
-			
-		}).bind(this);
+		}.bind(this));
 	},
 
 	// Based on emit, update votes for tiles
 	componentDidUpdate: function(prevProps, prevState) {
 		// TODO
 		// if(prevState.candidatesArray !== this.state.candidatesArray) {
-		// 	console.log(this.state.candidatesArray);
+			console.log(this.state.candidatesArray);
 		// }
 		console.log("PATTTIII");
 	},
 
 	render: function() {
 		return (
-			<div className="container">
-				{	
-					this.state.candidatesArray.forEach(candidate => {
-						<Tile name={candidate.name} imageSrc={candidate.photoSrc} party={candidate.party} />
-					})
-				}
+			<div>
+				{(this.state.candidatesArray.length) ? this.state.candidatesArray.map((candidate, index) => {
+						return (
+							<Tile key={index} id={candidate.id} name={candidate.name} photoSrc={candidate.photoSrc} party={candidate.party} votes={candidate.votes} />
+						);
+				}): null}
 			</div>
 		);		
 	}
