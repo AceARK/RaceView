@@ -5,39 +5,74 @@
 */
 
 import React from 'react';
-import Tile from './tile.js';
+import Tile from './Tile.js';
 
 import helpers from '../utils/helpers.js';
 
-class TileSet extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
+var TileSet = React.createClass ({
+	getInitialState: function() {
+		return {
 			candidatesArray: []
 		}
-	}
+	},
 
 	// Get required data right before mounting
-	componentWillMount() {
-		// Get list of candidates in array format
-		helpers.getCandidates().then(function(data) {
-			console.log(data);
-			this.setState(data);
-		});
+	componentWillMount: function() {
+		console.log("WILLMOUNT")
+		console.log(this.state.candidatesArray);
 		// Also set up io.emit reception here TODO
-	}
+	},
+
+	componentDidMount: function() {
+		console.log("SHORTY DID MOUNT YO");
+		var tempCandidatesArray = [];
+		// Get list of candidates in array format
+		helpers.getCandidateList().then(function(result) {
+			console.log(result);
+			// var tempCandidatesArray = [];
+			result.data.forEach((candidate) => {
+				var candidateId = candidate.id;
+				var candidateName = candidate.name;
+				var candidatePhotoSrc = candidate.photoSrc;
+				var candidateParty = candidate.party;
+				var candidateObject = {
+					id: candidateId,
+					name: candidateName,
+					photoSrc: candidatePhotoSrc,
+					party: candidateParty
+				};
+				console.log(candidateObject);
+				tempCandidatesArray.push(candidateObject);
+				console.log(tempCandidatesArray);
+			});
+
+			this.setState({
+				candidatesArray: tempCandidatesArray
+			});
+			
+		}).bind(this);
+	},
 
 	// Based on emit, update votes for tiles
-	componentDidUpdate(prevProps, prevStates) {
+	componentDidUpdate: function(prevProps, prevState) {
 		// TODO
-	}
+		// if(prevState.candidatesArray !== this.state.candidatesArray) {
+		// 	console.log(this.state.candidatesArray);
+		// }
+		console.log("PATTTIII");
+	},
 
-	render() {
-		// For each item in candidatesArray, get name, photo and votes and create Tile for it
-		this.state.candidatesArray.map((candidate) => {
-			<Tile // TODO : Create Tile
-		});
+	render: function() {
+		return (
+			<div className="container">
+				{	
+					this.state.candidatesArray.forEach(candidate => {
+						<Tile name={candidate.name} imageSrc={candidate.photoSrc} party={candidate.party} />
+					})
+				}
+			</div>
+		);		
 	}
-}
+});
 
 module.exports = TileSet;

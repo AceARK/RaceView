@@ -1,5 +1,5 @@
 /*
-* 	All sequelize query-call methods - tentative, subject to additions or deletions
+* 	All methods used by React components with sequelize query calls - tentative, subject to additions or deletions
 *	Candidate model specific - addCandidate, deleteCandidate, getCandidateList
 *	Vote model specific - addVoteByUser, getVotesPerCandidate, deleteVotesForCandidate, deleteAllVotes
 *	User model specific - addUser, deleteUser, authenticateUser, changePassword 

@@ -10,15 +10,26 @@ class Tile extends React.Component {
 		super(props);
 		this.state = {
 			imageSrc: "",
-			name: "",
-			votes: 0
+			name: ""
+			// votes: 0
 		};
+	}
+
+	componentDidUpdate(prevProps, prevStates) {
+		if(prevProps.name !== this.props.name) {
+			newState = {
+				name: this.props.name,
+				imageSrc: this.props.imageSrc
+			}
+			this.setState(newState);	
+		}
 	}
 
 	render() {
 		if(this.props.candidate) {
 			return (
 				<div className="candidateTile">
+					<h1 className="text-center">Tile</h1>
 					<div className="row">
 						<div className="col-xs-12">
 							<h1 className="candidateName">{this.state.name}</h1>

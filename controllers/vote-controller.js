@@ -73,12 +73,11 @@ module.exports = function(app) {
 	});
 
 	// Delete all votes from table
-	app.post("/delete/votes", function(req, res) {
+	app.delete("/delete/votes", function(req, res) {
 		db.Vote.destroy({
-			where: {},
 			truncate: true
 		}).then(function(response) {
-			res.send(response);
+			res.json(response);
 		}).catch(function(error) {
 			console.log(error);
 			res.send(error);
