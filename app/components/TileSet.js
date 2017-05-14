@@ -39,7 +39,7 @@ var TileSet = React.createClass ({
 			this.setState({
 				candidatesArray: parentArray
 			});
-		}
+		} 
 
 		console.log("TileSET UPDATED");
 	},
