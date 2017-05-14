@@ -8,17 +8,12 @@ import React from 'react';
 
 // Importing child components
 import TileSet from './TileSet.js';
-import TabularGraphPanel from './TabularGraphPanel.js';
-import VictoryTest from './VictoryTest';
+import ViewPanel from './ViewPanel';
 
 // Component definition
 class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
-		// State definition here
-		this.state = {
-			// candidatesArray: []
-		}
 	}
 
 	componentWillMount() {
@@ -39,7 +34,7 @@ class Dashboard extends React.Component {
 				<h1 className="text-center">Dashboard</h1>
 				<div className="row">
 					<div className="col-sm-7">
-						<VictoryTest candidatesArray = {this.props.candidatesArray} />
+						<ViewPanel candidatesArray = {this.props.candidatesArray} />
 					</div>
 					<div className="col-sm-5">
 						<TileSet candidatesArray = {this.props.candidatesArray} />
