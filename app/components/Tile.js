@@ -47,7 +47,7 @@ var Tile = React.createClass ({
 	},
 
 	render: function() {
-		var style = "height: 50px; width: 50px;";
+		var style = "height: 50px; width: 50px";
 		return (
 			<div className="candidateTile text-center">
 				<div className="row">

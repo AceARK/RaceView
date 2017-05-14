@@ -41,9 +41,7 @@ module.exports = function(app) {
 
 	// Get votes of all candidates
 	app.get("/votes/all", function(req, res) {
-		// TODO: Get votes for all candidates
-		// Maybe something resembling ->
-		
+		// Get votes for all candidates
 		db.Vote.findAll({
 		  attributes: ['CandidateId', [db.sequelize.fn('COUNT', db.sequelize.col('CandidateId')), 'VoteCount']], 
 		  group: 'CandidateId'

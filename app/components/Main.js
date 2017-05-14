@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import helpers from '../utils/helpers.js';
+
 class Main extends React.Component {
 	constructor(props) {
 		super(props);
@@ -8,8 +10,13 @@ class Main extends React.Component {
 			// Currently contains array of terms to be looped through and links created for.
 			// A title matching the theme of election - Presidential, School Senate, American Idol etc 
 			linkArray: ['Login'],
-			headerTitle: 'Presidential Election'
+			// headerTitle: 'Presidential Election',
+			candidatesArray: []
 		}
+	}
+
+	componentWillMount() {
+		
 	}
 
 	render() {
@@ -19,6 +26,7 @@ class Main extends React.Component {
 				  <div className="container">
 				    <div className="navbar-header">
 				      <a className="navbar-brand" href="/">RaceView</a>
+				      <h1 className="text-center">{this.state.headerTitle}</h1>
 				    </div>
 				    
 			      	<ul className="nav navbar-nav navbar-right">
@@ -29,7 +37,7 @@ class Main extends React.Component {
 				  </div>
 				</nav>
 				<div className="container-fluid">
-					{this.props.children}
+					 {React.cloneElement(this.props.children, { candidatesArray: this.state.candidatesArray })}
 				</div>
 			</div>
 		);

@@ -15,6 +15,29 @@ class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
 		// State definition here
+		this.state = {
+			// candidatesArray: []
+		}
+	}
+
+	componentWillMount() {
+		console.log(this.props);
+	}
+
+	componentDidMount() {
+		console.log(this.props.candidatesArray);
+		// var propsArray = this.props.candidatesArray;
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		console.log("Dashboard updated with : " + this.props.candidatesArray);
+		// if(prevProps.candidatesArray !== this.state.candidatesArray) {
+		// 	var propsArray = this.props.candidatesArray;
+		// 	console.log("INSIDE THE STUPID LOOOOP");
+		// 	this.setState({
+		// 		candidatesArray: propsArray
+		// 	});
+		// }
 	}
 
 	render() {
@@ -26,7 +49,7 @@ class Dashboard extends React.Component {
 						<TabularGraphPanel />
 					</div>
 					<div className="col-sm-5">
-						<TileSet />
+						<TileSet candidatesArray = {this.props.candidatesArray}/>
 					</div>
 				</div>
 			</div>	

@@ -19,53 +19,29 @@ var TileSet = React.createClass ({
 	// Get required data right before mounting
 	componentWillMount: function() {
 		console.log("WILLMOUNT")
-		console.log(this.state.candidatesArray);
+		console.log(this.props.candidatesArray);
 		// Also set up io.emit reception here TODO
 	},
 
 	componentDidMount: function() {
 		console.log("SHORTY DID MOUNT YO");
-		var tempCandidatesArray = [];
 		// var componentThis = this;
-		// Get list of candidates in array format
-		helpers.getCandidateList().then(function(result) {
-			// console.log(result);
-			// var tempCandidatesArray = [];
-			result.data.forEach((candidate) => {
-				var candidateId = candidate.id;
-				var candidateName = candidate.name;
-				var candidatePhotoSrc = candidate.photoSrc;
-				var candidateParty = candidate.party;
-				helpers.getVotesPerCandidate(candidateId).then(function(voteData) {
-					// console.log(voteData);
-					var candidateVotes = voteData.data;
-					var candidateObject = {
-						id: candidateId,
-						name: candidateName,
-						photoSrc: candidatePhotoSrc,
-						party: candidateParty,
-						votes: candidateVotes
-					};
-					console.log(candidateObject);
-					tempCandidatesArray.push(candidateObject);
-					console.log(tempCandidatesArray);
-
-					this.setState({
-						candidatesArray: tempCandidatesArray
-					});
-				}.bind(this));
-			});
-
-		}.bind(this));
+		
 	},
 
 	// Based on emit, update votes for tiles
 	componentDidUpdate: function(prevProps, prevState) {
-		// TODO
-		// if(prevState.candidatesArray !== this.state.candidatesArray) {
-			console.log(this.state.candidatesArray);
-		// }
-		console.log("PATTTIII");
+		// console.log(this.props.candidatesArray);
+		console.log(this.state.candidatesArray);
+		// Avoiding max call stack error
+		if(prevProps !== this.props) {
+			var parentArray = this.props.candidatesArray;
+			this.setState({
+				candidatesArray: parentArray
+			});
+		}
+
+		console.log("TileSET UPDATED");
 	},
 
 	render: function() {
