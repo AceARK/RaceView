@@ -1,5 +1,5 @@
 module.exports = {
-  
+
   // This is the entry point or start of our react applicaton
   entry: "./app/app.js",
 
@@ -22,7 +22,7 @@ module.exports = {
           // These are the specific transformations we'll be using.
           presets: ["react", "es2015"]
         }
-      }
+      } 
     ]
   },
   // This lets us debug our react code in chrome dev tools. Errors will have lines and file names
