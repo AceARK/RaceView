@@ -40,8 +40,7 @@ class DashboardPage extends React.Component {
 					id: candidateId,
 					name: candidateName,
 					photoSrc: candidatePhotoSrc,
-					party: candidateParty,
-					votes: 0
+					party: candidateParty
 				};
 				console.log(candidateObject);
 				tempCandidatesArray.push(candidateObject);
@@ -55,16 +54,8 @@ class DashboardPage extends React.Component {
 		}.bind(this));
 	}
 
-	// componentDidMount() {
-		
-	// 	console.log(this.state.candidatesArray);
-	// }
-
 	componentDidUpdate() {
 		console.log(this.state.candidatesArray);
-		// this.setState({
-		// 	candidatesArray: this.state.candidatesArray
-		// })
 	}
 
 	render() {

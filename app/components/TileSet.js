@@ -9,10 +9,15 @@ import Tile from './Tile.js';
 
 import helpers from '../utils/helpers.js';
 
+// Socket.io client code
+const io = require('socket.io-client');
+const socket = io();
+
 var TileSet = React.createClass ({
 	getInitialState: function() {
 		return {
-			candidatesArray: []
+			candidatesArray: [],
+			votesArray: []
 		}
 	},
 
@@ -23,10 +28,22 @@ var TileSet = React.createClass ({
 		// Also set up io.emit reception here TODO
 	},
 
-	componentDidMount: function() {
-		console.log("SHORTY DID MOUNT YO");
-		// var componentThis = this;
-		
+	 componentDidMount: function() {
+	  // var socket = io.connect('/');
+	    socket.on('broadcast', function(voteData) {
+	        console.log('Somebody Voted Yo!', voteData);
+	       	// Setting vote Data
+	        this.setState({
+	        	votesArray: voteData
+	        });
+
+	    }.bind(this));
+	  },
+
+	shouldComponentUpdate: function(nextProps, nextState) {
+		// console.log(nextProps);
+		console.log(nextState);
+		return this.state === nextState;
 	},
 
 	// Based on emit, update votes for tiles
@@ -44,12 +61,22 @@ var TileSet = React.createClass ({
 		console.log("TileSET UPDATED");
 	},
 
+	filterFunction: function(item) {
+		var filteredArray = this.state.votesArray.filter((voteItem) => voteItem.CandidateId === item.id);
+		if(!filteredArray.length) {
+			return 0;
+		}
+
+		return filteredArray[0].VoteCount;
+	},
+
+// {(this.state.votesArray.filter((item) =>  item.CandidateId === candidate.id)).votes}
 	render: function() {
 		return (
 			<div>
 				{(this.state.candidatesArray.length) ? this.state.candidatesArray.map((candidate, index) => {
 						return (
-							<Tile key={index} id={candidate.id} name={candidate.name} photoSrc={candidate.photoSrc} party={candidate.party} votes={candidate.votes} />
+							<Tile key={index} id={candidate.id} name={candidate.name} photoSrc={candidate.photoSrc} party={candidate.party} votes={this.filterFunction(candidate)} />
 						);
 				}): null}
 			</div>

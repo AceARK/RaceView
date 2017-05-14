@@ -30,7 +30,7 @@ app.use(express.static("./public"));
 // Requiring controllers here and passing app
 require("./controllers/user-controller.js")(app);
 require("./controllers/candidates-controller.js")(app);
-require("./controllers/vote-controller.js")(app);
+require("./controllers/vote-controller.js")(app, io);
 
 // Syncing sequelize models, then starting express app
 db.sequelize.sync({force: false}).then(function() {

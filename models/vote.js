@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
           // Foreign key to user_id
           Vote.belongsTo(models.User, {
             foreignKey: {
-              allowNull: false
+              allowNull: true
             }
           });
           // Foreign key to candidate_id

@@ -26,18 +26,10 @@ class Dashboard extends React.Component {
 
 	componentDidMount() {
 		console.log(this.props.candidatesArray);
-		// var propsArray = this.props.candidatesArray;
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		console.log("Dashboard updated with : " + this.props.candidatesArray);
-		// if(prevProps.candidatesArray !== this.state.candidatesArray) {
-		// 	var propsArray = this.props.candidatesArray;
-		// 	console.log("INSIDE THE STUPID LOOOOP");
-		// 	this.setState({
-		// 		candidatesArray: propsArray
-		// 	});
-		// }
 	}
 
 	render() {
