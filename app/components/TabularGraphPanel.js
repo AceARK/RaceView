@@ -12,7 +12,9 @@ class TabularGraphPanel extends React.Component {
 
 	render() {
 		return(
-			<h1 className="text-center">TabularGraphPanel</h1>
+			<div>
+				<h1 className="text-center">TabularGraphPanel</h1>
+			</div>
 		);
 	}
 }

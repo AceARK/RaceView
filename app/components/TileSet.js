@@ -7,8 +7,6 @@
 import React from 'react';
 import Tile from './Tile.js';
 
-import helpers from '../utils/helpers.js';
-
 // Socket.io client code
 const io = require('socket.io-client');
 const socket = io();
@@ -43,7 +41,7 @@ var TileSet = React.createClass ({
 	shouldComponentUpdate: function(nextProps, nextState) {
 		// console.log(nextProps);
 		console.log(nextState);
-		return this.state === nextState;
+		return true;
 	},
 
 	// Based on emit, update votes for tiles

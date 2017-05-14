@@ -1,5 +1,5 @@
 module.exports = {
-
+  
   // This is the entry point or start of our react applicaton
   entry: "./app/app.js",
 

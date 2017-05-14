@@ -1,6 +1,7 @@
 // Include the Main React Dependencies
 import React from "react";
 import ReactDOM from "react-dom";
+import * as V from 'victory';
 
 // Include the main Main Component
 import routes from "./config/routes.js";
