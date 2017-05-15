@@ -14,8 +14,8 @@ var ViewPanel = React.createClass ({
 
 	// Get required data right before mounting
 	componentWillMount: function() {
-		console.log("WILLMOUNT")
-		console.log(this.props.candidatesArray);
+		// console.log("WILLMOUNT")
+		// console.log(this.props.candidatesArray);
 		// Also set up io.emit reception here TODO
 	},
 
@@ -23,7 +23,7 @@ var ViewPanel = React.createClass ({
 	componentDidMount: function() {
 	  // var socket = io.connect('/');
 	    socket.on('broadcast', function(voteData) {
-	        console.log('Somebody Voted Yo!', voteData);
+	//         console.log('Somebody Voted Yo!', voteData);
 	       	// Setting vote Data
 	        this.setState({
 	        	votesArray: voteData
@@ -35,14 +35,14 @@ var ViewPanel = React.createClass ({
 	// Area to stop cyclic updation and max call stack error
 	shouldComponentUpdate: function(nextProps, nextState) {
 		// console.log(nextProps);
-		console.log(nextState);
+		// console.log(nextState);
 		return true;
 	},
 
 	// Based on emit, update votes for tiles
 	componentDidUpdate: function(prevProps, prevState) {
 		// console.log(this.props.candidatesArray);
-		console.log(this.state.candidatesArray);
+		// console.log(this.state.candidatesArray);
 		// Avoiding max call stack error
 		if(prevProps !== this.props) {
 			var parentArray = this.props.candidatesArray;
@@ -51,7 +51,7 @@ var ViewPanel = React.createClass ({
 			});
 		} 
 
-		console.log("VictoryTest UPDATED");
+		// console.log("VictoryTest UPDATED");
 	},
 
 	// Filtering votesArray to get only voteCount specific to CandidateId
@@ -73,7 +73,7 @@ var ViewPanel = React.createClass ({
 	 			"votes": this.filterFunction(candidate)
 	 		}
 	 	});
-	 	console.log(candidateVotesData);
+	 	// console.log(candidateVotesData);
 		return (
 	      <div>
 	        <VictoryChart

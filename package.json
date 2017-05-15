@@ -27,6 +27,7 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-router": "^2.4.1",
+    "react-shuffle": "^2.1.0",
     "sequelize": "^3.28.0",
     "socket.io": "^1.7.3",
     "victory": "^0.17.0"

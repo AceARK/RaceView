@@ -17,15 +17,15 @@ class Dashboard extends React.Component {
 	}
 
 	componentWillMount() {
-		console.log(this.props);
+		// console.log(this.props);
 	}
 
 	componentDidMount() {
-		console.log(this.props.candidatesArray);
+		// console.log(this.props.candidatesArray);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		console.log("Dashboard updated with : " + this.props.candidatesArray);
+		// console.log("Dashboard updated with : " + this.props.candidatesArray);
 	}
 
 	render() {

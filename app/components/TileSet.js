@@ -7,6 +7,8 @@
 import React from 'react';
 import Tile from './Tile.js';
 
+import { Shuffle } from 'react-shuffle';
+
 // Socket.io client code
 const io = require('socket.io-client');
 const socket = io();
@@ -15,24 +17,22 @@ var TileSet = React.createClass ({
 	getInitialState: function() {
 		return {
 			candidatesArray: [],
-			votesArray: []
+			votesArray: [],
+			order: [],
+			animationTrigger: 0
 		}
-	},
-
-	// Get required data right before mounting
-	componentWillMount: function() {
-		console.log("WILLMOUNT")
-		console.log(this.props.candidatesArray);
-		// Also set up io.emit reception here TODO
 	},
 
 	 componentDidMount: function() {
 	  // var socket = io.connect('/');
 	    socket.on('broadcast', function(voteData) {
-	        console.log('Somebody Voted Yo!', voteData);
+	//         console.log('Somebody Voted Yo!', voteData);
+			var orderedVoteData = voteData.sort((a,b) => b.VoteCount -a.VoteCount);
+			var order = orderedVoteData.map((data) => data.CandidateId);
 	       	// Setting vote Data
 	        this.setState({
-	        	votesArray: voteData
+	        	votesArray: orderedVoteData,
+	        	order: order
 	        });
 
 	    }.bind(this));
@@ -40,7 +40,16 @@ var TileSet = React.createClass ({
 
 	shouldComponentUpdate: function(nextProps, nextState) {
 		// console.log(nextProps);
-		console.log(nextState);
+		// console.log(nextState);
+		return true;
+	},
+
+	areArraysEqual: function(one, two) {
+		for(var i=0; i<one.length; i++) {
+			if(one[i] !== two[i]) {
+				return false;
+			}
+		}
 		return true;
 	},
 
@@ -49,14 +58,24 @@ var TileSet = React.createClass ({
 		// console.log(this.props.candidatesArray);
 		console.log(this.state.candidatesArray);
 		// Avoiding max call stack error
-		if(prevProps !== this.props) {
+		if(prevProps !== this.props && prevState.animationTrigger !== this.state.animationTrigger) {
 			var parentArray = this.props.candidatesArray;
 			this.setState({
 				candidatesArray: parentArray
 			});
 		} 
 
-		console.log("TileSET UPDATED");
+		if(!this.areArraysEqual(prevState.order, this.state.order) ) {
+			console.log(prevState.order);
+			console.log(this.state.order);
+			console.log("ORDER CHANGED!!!!!!!!!!!!!!");
+			var newRandom = Math.random()*100;
+			this.setState = {
+				style : newRandom
+			}
+		}
+
+		// console.log("TileSET UPDATED");
 	},
 
 	filterFunction: function(item) {
@@ -79,12 +98,12 @@ var TileSet = React.createClass ({
 	 			"votes": this.filterFunction(candidate)
 	 		}
 	 	});
-	 	console.log(candidateVotesData);
+	 	// console.log(candidateVotesData);
 		return (
-			<div>
+			<div className="tileSet">
 				{(candidateVotesData.length) ? candidateVotesData.sort((a,b) => b.votes - a.votes).map((candidate, index) => {
 						return (
-							<Tile key={index} id={candidate.id} name={candidate.name} photoSrc={candidate.photo} party={candidate.party} votes={candidate.votes} />
+							<Tile key={candidate.id} name={candidate.name} photoSrc={candidate.photo} party={candidate.party} votes={candidate.votes} />
 						);
 				}): null }
 			</div>

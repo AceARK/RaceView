@@ -22,7 +22,7 @@ class DashboardPage extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log("DID Mountttttt");
+		// console.log("DID Mountttttt");
 		
 		// Get list of candidates in array format
 		helpers.getCandidateList().then(function(result) {
@@ -42,9 +42,9 @@ class DashboardPage extends React.Component {
 					photoSrc: candidatePhotoSrc,
 					party: candidateParty
 				};
-				console.log(candidateObject);
+				// console.log(candidateObject);
 				tempCandidatesArray.push(candidateObject);
-				console.log(tempCandidatesArray);
+				// console.log(tempCandidatesArray);
 			});
 			// Set component's candidates array state
 			this.setState({
@@ -55,7 +55,7 @@ class DashboardPage extends React.Component {
 	}
 
 	componentDidUpdate() {
-		console.log(this.state.candidatesArray);
+		// console.log(this.state.candidatesArray);
 	}
 
 	render() {

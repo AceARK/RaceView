@@ -30,9 +30,9 @@ var Tile = React.createClass ({
 	
 	componentDidUpdate: function(prevProps, prevState) {
 		if(prevProps.votes !== this.props.votes) {
-			console.log(prevState);
-			console.log(prevProps);
-			console.log(this.props);
+			// console.log(prevState);
+			// console.log(prevProps);
+			// console.log(this.props);
 			var newState = {
 				id: this.props.id,
 				name: this.props.name,
@@ -42,7 +42,7 @@ var Tile = React.createClass ({
 			}
 
 			this.setState(newState);
-			console.log("BLAHHHH");
+			// console.log("BLAHHHH");
 		}
 	},
 
