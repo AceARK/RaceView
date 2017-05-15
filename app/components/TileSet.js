@@ -70,13 +70,23 @@ var TileSet = React.createClass ({
 
 // {(this.state.votesArray.filter((item) =>  item.CandidateId === candidate.id)).votes}
 	render: function() {
+		var candidateVotesData = this.state.candidatesArray.map((candidate) => {
+	 		return {
+	 			"id": candidate.id,
+	 			"name": candidate.name,
+	 			"photo": candidate.photoSrc,
+	 			"party": candidate.party,
+	 			"votes": this.filterFunction(candidate)
+	 		}
+	 	});
+	 	console.log(candidateVotesData);
 		return (
 			<div>
-				{(this.state.candidatesArray.length) ? this.state.candidatesArray.map((candidate, index) => {
+				{(candidateVotesData.length) ? candidateVotesData.sort((a,b) => b.votes - a.votes).map((candidate, index) => {
 						return (
-							<Tile key={index} id={candidate.id} name={candidate.name} photoSrc={candidate.photoSrc} party={candidate.party} votes={this.filterFunction(candidate)} />
+							<Tile key={index} id={candidate.id} name={candidate.name} photoSrc={candidate.photo} party={candidate.party} votes={candidate.votes} />
 						);
-				}): null}
+				}): null }
 			</div>
 		);		
 	}
