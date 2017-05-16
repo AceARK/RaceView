@@ -18,6 +18,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "body-parser": "^1.17.1",
+    "cheerio": "^0.22.0",
     "express": "^4.15.2",
     "express-session": "^1.15.1",
     "express-validator": "^3.1.2",
@@ -28,6 +29,7 @@
     "react-dom": "^0.14.3",
     "react-router": "^2.4.1",
     "react-shuffle": "^2.1.0",
+    "request": "^2.81.0",
     "sequelize": "^3.28.0",
     "socket.io": "^1.7.3",
     "victory": "^0.17.0"

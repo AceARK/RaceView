@@ -1,4 +1,5 @@
 import React from 'react';
+import helpers from '../utils/helpers.js';
 
 const io = require('socket.io-client');
 const socket = io();
@@ -8,7 +9,8 @@ var NewsPanel = React.createClass ({
 		return {
 			candidatesArray: [],
 			votesArray: [],
-			order: []
+			order: [],
+			latestData: []
 		}
 	},
 
@@ -26,6 +28,10 @@ var NewsPanel = React.createClass ({
 	        });
 
 	    }.bind(this));
+
+		// Scrape latest news for all candidates and store as state
+		var newsArray = [];
+		helpers.getLatestNews(this.props.candidatesArray, newsArray);
 	},
 
 	// Area to stop cyclic updation and max call stack error
@@ -60,10 +66,18 @@ var NewsPanel = React.createClass ({
 
 		if(!this.areArraysEqual(prevState.order, this.state.order) ) {
 			console.log(prevState.order);
+			var previousLeader = this.getLeadingCandidate(this.state.candidatesArray, prevState.order);
 			console.log(this.state.order);
 			console.log("ORDER CHANGED!!!!!!!!!!!!!!");
-			var newRandom = Math.random()*100;
 			// Run query to get scraped data from 'The Onion'
+			var leadingCandidate = this.getLeadingCandidate(this.state.candidatesArray, this.state.order);
+			if(leadingCandidate !== previousLeader) {
+				// Scrape and get latest
+				helpers.getLatestOnLeader().then(function(latest) {
+					console.log(latest);
+				});
+			}
+			
 		}
 
 	// console.log("VictoryTest UPDATED");
@@ -79,21 +93,17 @@ var NewsPanel = React.createClass ({
 		return filteredArray[0].VoteCount;
 	},
 
-	// getDisplayName: function(fullName) {
-	// 	var displayName = "";
-	// 	var nameArray = fullName.split(" "); 
-	// 	var firstInitial = nameArray[0].split("")[0]; 
-	// 	displayName = `${firstInitial}.${nameArray[1]}`;
-	// 	return displayName;
-	// },
+	getLeadingCandidate: function(candidatesArray, order) {
+		var leadingCandidateData = candidatesArray.filter((candidate) => candidate.id === order[0]);
+		if(leadingCandidateData.length) {
+			console.log(leadingCandidateData[0].name);
+		}
+		return leadingCandidateData[0].name;
+	},
+
 
 	// Render the charts
 	render: function() {
-		var leadingCandidateData = this.state.candidatesArray.filter((candidate) => candidate.id === this.state.order[0]);
-		if(leadingCandidateData.length) {
-			console.log(leadingCandidateData[0].id);
-		}
-		
 	 	// console.log(candidateVotesData);
 		return (
 	      <h1>View Panel</h1>

@@ -11,6 +11,34 @@ var axios = require("axios");
 // Helper functions to make sequelize queries
 var helpers = {
 
+// General helpers
+	
+	// Get latest news on leading candidate
+	getLatestNews: function(candidatesArray, newsArray) {
+		// Array that will have candidate objects with id and news data each
+		var promiseArray = [];
+		// Looping through each candidate in array
+		candidatesArray.forEach(function(candidateObj) {
+			var candidateName = candidateObj.name;
+			// Initialize object to hold candidate id and news data
+			var candidateObject = {};
+			promiseArray.push(axios.post("/scrape/latest", candidateName).then(function(response) {
+				console.log("AXIOS LATEST", response);
+				// Constructing object to push to main array
+				candidateObject = {
+					"id": candidate.id,
+					"latestNewsArray": response
+				}
+				// Push to main array
+				newsArray.push(candidateObject);
+			}));
+		});
+		Promise.all(promiseArray).then(function() {
+			
+		});
+
+	},
+
 // Candidate specific helpers
 
 	// Get candidate list

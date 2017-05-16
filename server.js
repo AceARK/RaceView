@@ -28,6 +28,7 @@ app.use(expressValidator());
 app.use(express.static("./public"));
 
 // Requiring controllers here and passing app
+require("./controllers/latest-news-controller.js")(app);
 require("./controllers/user-controller.js")(app);
 require("./controllers/candidates-controller.js")(app);
 require("./controllers/vote-controller.js")(app, io);
