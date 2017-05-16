@@ -46,6 +46,14 @@
 	overflow: scroll;
 }
 
+.viewPanel .col-sm-7{
+	padding-right: 2px;
+} 
+
+.viewPanel .col-sm-5 {
+	padding-left: 2px;
+}
+
 .tileSet {
 	border: 2px solid grey;
 	border-radius: 5px;

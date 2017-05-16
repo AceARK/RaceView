@@ -1,6 +1,8 @@
 import React from 'react';
 import ViewBar from "./ViewBar";
 import ViewPie from "./ViewPie";
+import NewsPanel from "./NewsPanel";
+
 
 const io = require('socket.io-client');
 const socket = io();
@@ -40,6 +42,11 @@ var ViewPanel = React.createClass ({
 	      		</div>
 	      		<div className="col-sm-5">
 	      			<ViewPie candidatesArray={this.state.candidatesArray}/>
+	      		</div>
+	      	</div>
+	      	<div className="row">
+	      		<div className="col-sm-10 col-sm-offset-1">
+	      			<NewsPanel candidatesArray={this.state.candidatesArray}/>
 	      		</div>
 	      	</div>
 	      </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { VictoryBar, VictoryChart, VictoryContainer, VictoryAxis, VictoryTheme, VictoryStack, VictoryPie } from 'victory';
+import { VictoryVoronoi, VictoryChart, VictoryContainer, VictoryAxis, VictoryTheme, VictoryStack, VictoryPie } from 'victory';
 
 const io = require('socket.io-client');
 const socket = io();
@@ -76,22 +76,10 @@ var ViewPie = React.createClass ({
 	 	});
 	 	// console.log(candidateVotesData);
 		return (
-	        <VictoryPie
-				data={candidateVotesData}
-				x="name"
-				y="votes"
-				colorScale={"heatmap"}
-				style={{
-					// data: {fill: (d) => d.y > 0 ? "red" : "blue"},
-					labels: {fontSize: 18, lineHeight: 40},
-					// parent: {border: "1px solid #ccc"}
-				}}
-				labels={candidateVotesData.map((candidate) => this.getDisplayName(candidate.name))}
-				padding={100}
-				// labelRadius={300}
-				labelPadding={30}
-				animate={{duration: 2000, onLoad: {duration: 1000}, onEnter: {duration: 500, before: () => ({y: 0})}}}
-			/>
+	        <VictoryChart
+			 theme={VictoryTheme.material}
+			> 
+			</VictoryChart>
 	    );
 	}
 });

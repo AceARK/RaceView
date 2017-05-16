@@ -83,6 +83,9 @@ var ViewBar = React.createClass ({
 	        >
 	          <VictoryAxis
 	            tickValues={this.state.candidatesArray.map((candidate) => this.getDisplayName(candidate.name))}
+	            style={{
+				  tickLabels: {fontSize: 13, padding: 5}
+				}}
 	          />
 	          <VictoryAxis
 	            dependentAxis

@@ -97,14 +97,14 @@ var ViewPie = React.createClass ({
 				colorScale={"heatmap"}
 				style={{
 					// data: {fill: (d) => d.y > 0 ? "red" : "blue"},
-					labels: {fontSize: 18, lineHeight: 40},
+					labels: {fontSize: 18, lineHeight: 10},
 					// parent: {border: "1px solid #ccc"}
 				}}
 				labels={keyArray.map((party) => `${party}
 					${partyObject[party]}`)}
-				padding={100}
+				padding={90}
 				// labelRadius={300}
-				labelPadding={30}
+				labelPadding={20}
 				animate={{duration: 2000, onLoad: {duration: 1000}, onEnter: {duration: 500, before: () => ({y: 0})}}}
 			/>
 	    );
