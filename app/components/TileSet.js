@@ -6,8 +6,9 @@
 
 import React from 'react';
 import Tile from './Tile.js';
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { Shuffle } from 'react-shuffle';
+// import { Shuffle } from 'react-shuffle';
 
 // Socket.io client code
 const io = require('socket.io-client');
@@ -19,7 +20,8 @@ var TileSet = React.createClass ({
 			candidatesArray: [],
 			votesArray: [],
 			order: [],
-			animationTrigger: 0
+			animationTrigger: 0,
+			style: ""
 		}
 	},
 
@@ -58,7 +60,7 @@ var TileSet = React.createClass ({
 		// console.log(this.props.candidatesArray);
 		console.log(this.state.candidatesArray);
 		// Avoiding max call stack error
-		if(prevProps !== this.props && prevState.animationTrigger !== this.state.animationTrigger) {
+		if(prevProps !== this.props) {
 			var parentArray = this.props.candidatesArray;
 			this.setState({
 				candidatesArray: parentArray
@@ -70,9 +72,10 @@ var TileSet = React.createClass ({
 			console.log(this.state.order);
 			console.log("ORDER CHANGED!!!!!!!!!!!!!!");
 			var newRandom = Math.random()*100;
-			this.setState = {
-				style : newRandom
-			}
+			// this.setState = {
+			// 	animationTrigger : newRandom,
+			// 	style: `${this.state.style} animateTile`
+			// }
 		}
 
 		// console.log("TileSET UPDATED");
@@ -103,7 +106,7 @@ var TileSet = React.createClass ({
 			<div className="tileSet">
 				{(candidateVotesData.length) ? candidateVotesData.sort((a,b) => b.votes - a.votes).map((candidate, index) => {
 						return (
-							<Tile key={candidate.id} name={candidate.name} photoSrc={candidate.photo} party={candidate.party} votes={candidate.votes} />
+							<Tile style={this.state.style} key={index} name={candidate.name} photoSrc={candidate.photo} party={candidate.party} votes={candidate.votes} />
 						);
 				}): null }
 			</div>

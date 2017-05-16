@@ -30,13 +30,13 @@ class Dashboard extends React.Component {
 
 	render() {
 		return (
-			<div className="container">
+			<div className="dashboard container-fluid">
 				<h1 className="text-center">Dashboard</h1>
 				<div className="row">
-					<div className="col-sm-7">
+					<div className="col-sm-8">
 						<ViewPanel candidatesArray = {this.props.candidatesArray} />
 					</div>
-					<div className="col-sm-5">
+					<div className="col-sm-4">
 						<TileSet candidatesArray = {this.props.candidatesArray} />
 					</div>
 				</div>

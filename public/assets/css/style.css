@@ -1,0 +1,60 @@
+* {
+	box-sizing: border-box;
+}
+
+/* The element to apply the animation to */
+.animateTile {
+    background-color: #49ffe3;
+    animation-name: pulse;
+    animation-duration: 4s;
+}
+
+
+/* The animation code */
+@keyframes pulse {
+    from {background-color: #49ffe3;}
+    to {background-color: #49ff98;}
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.dashboard {
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+.viewPanel {
+	border: 2px solid blue;
+	border-radius: 5px;
+	max-height: 700px;
+	overflow: scroll;
+}
+
+.tileSet {
+	border: 2px solid grey;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.candidateTile {
+	border: 2px solid grey;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 5px;
+}

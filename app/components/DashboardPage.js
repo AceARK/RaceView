@@ -60,10 +60,12 @@ class DashboardPage extends React.Component {
 
 	render() {
 		return (
-			<div className="container">
+			<div className="container-fluid">
 				<h1 className="text-center">DashboardPage</h1>
-				<div className="container-fluid">
+				<div className="row">
 					<Dashboard candidatesArray = {this.state.candidatesArray}/>
+				</div>
+				<div className="row">
 					<PopularityDiv candidatesArray = {this.state.candidatesArray}/>
 				</div>
 			</div>	
