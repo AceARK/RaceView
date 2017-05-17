@@ -46,19 +46,19 @@ var TileSet = React.createClass ({
 		return true;
 	},
 
-	areArraysEqual: function(one, two) {
-		for(var i=0; i<one.length; i++) {
-			if(one[i] !== two[i]) {
-				return false;
-			}
-		}
-		return true;
-	},
+	// areArraysEqual: function(one, two) {
+	// 	for(var i=0; i<one.length; i++) {
+	// 		if(one[i] !== two[i]) {
+	// 			return false;
+	// 		}
+	// 	}
+	// 	return true;
+	// },
 
 	// Based on emit, update votes for tiles
 	componentDidUpdate: function(prevProps, prevState) {
 		// console.log(this.props.candidatesArray);
-		console.log(this.state.candidatesArray);
+		// console.log(this.state.candidatesArray);
 		// Avoiding max call stack error
 		if(prevProps !== this.props) {
 			var parentArray = this.props.candidatesArray;
@@ -67,16 +67,16 @@ var TileSet = React.createClass ({
 			});
 		} 
 
-		if(!this.areArraysEqual(prevState.order, this.state.order) ) {
-			console.log(prevState.order);
-			console.log(this.state.order);
-			console.log("ORDER CHANGED!!!!!!!!!!!!!!");
-			var newRandom = Math.random()*100;
-			// this.setState = {
-			// 	animationTrigger : newRandom,
-			// 	style: `${this.state.style} animateTile`
-			// }
-		}
+		// if(!this.areArraysEqual(prevState.order, this.state.order) ) {
+		// 	console.log(prevState.order);
+		// 	console.log(this.state.order);
+		// 	console.log("ORDER CHANGED!!!!!!!!!!!!!!");
+		// 	var newRandom = Math.random()*100;
+		// 	// this.setState = {
+		// 	// 	animationTrigger : newRandom,
+		// 	// 	style: `${this.state.style} animateTile`
+		// 	// }
+		// }
 
 		// console.log("TileSET UPDATED");
 	},
@@ -104,9 +104,9 @@ var TileSet = React.createClass ({
 	 	// console.log(candidateVotesData);
 		return (
 			<div className="tileSet">
-				{(candidateVotesData.length) ? candidateVotesData.sort((a,b) => b.votes - a.votes).map((candidate, index) => {
+				{(candidateVotesData.length) ? candidateVotesData.sort((a,b) => b.votes - a.votes).map((candidate) => {
 						return (
-							<Tile style={this.state.style} key={index} name={candidate.name} photoSrc={candidate.photo} party={candidate.party} votes={candidate.votes} />
+							<Tile style={this.state.style} key={candidate.id} name={candidate.name} photoSrc={candidate.photo} party={candidate.party} votes={candidate.votes} />
 						);
 				}): null }
 			</div>

@@ -14,13 +14,21 @@ var helpers = {
 // General helpers
 	
 	// Get latest news on leading candidate
-	getLatestNews: function(candidatesArray) {
+	getLatestNews: function(candidateName) {
 		console.log("Getting latest news on leading candidate");
-		return axios.post("/scrape/latest", candidatesArray).then(function(response) {
+		return axios.post("/scrape/latest", candidateName).then(function(response) {
 			console.log("AXIOS LATEST", response);
-			// return response;
+			return response;
 		});
 	},
+
+	// getLatestShit: function(candidateId) {
+	// 	console.log("Getting latest news on leading candidate");
+	// 	return axios.post("/scrape/test", candidateId).then(function(response) {
+	// 		console.log("AXIOS CANDIDATES LATEST", response);
+	// 		return response;
+	// 	});
+	// },
 
 // Candidate specific helpers
 

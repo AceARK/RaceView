@@ -7,10 +7,11 @@ const socket = io();
 var NewsPanel = React.createClass ({
 	getInitialState: function() {
 		return {
-			candidatesArray: [],
+			candidatesArray: this.props.candidatesArray,
 			votesArray: [],
 			order: [],
-			latestData: []
+			latestData: [],
+			updatedOnce: false
 		}
 	},
 
@@ -30,8 +31,7 @@ var NewsPanel = React.createClass ({
 	    }.bind(this));
 
 		// Scrape latest news for all candidates and store as state
-		var newsArray = [];
-		helpers.getLatestNews(this.props.candidatesArray, newsArray);
+		// var CandidateIdList = [1,2,3,4,5];
 	},
 
 	// Area to stop cyclic updation and max call stack error
@@ -63,22 +63,42 @@ var NewsPanel = React.createClass ({
 			});
 		} 
 
-
-		if(!this.areArraysEqual(prevState.order, this.state.order) ) {
-			console.log(prevState.order);
-			var previousLeader = this.getLeadingCandidate(this.state.candidatesArray, prevState.order);
-			console.log(this.state.order);
-			console.log("ORDER CHANGED!!!!!!!!!!!!!!");
-			// Run query to get scraped data from 'The Onion'
-			var leadingCandidate = this.getLeadingCandidate(this.state.candidatesArray, this.state.order);
-			if(leadingCandidate !== previousLeader) {
-				// Scrape and get latest
-				helpers.getLatestOnLeader().then(function(latest) {
-					console.log(latest);
+		if(!this.state.latestData.length && !this.state.updatedOnce) {
+			var promiseArray = [];
+			var newsArray = [];
+			console.log("DID MOUNT CANDIDATES ARRAY");
+			console.log(this.state.candidatesArray);
+			this.state.candidatesArray.forEach(function(candidateObj){
+				var candidateName = candidateObj.name;
+				console.log(candidateName);
+				promiseArray.push(helpers.getLatestNews(candidateName).then(function(data) {
+					console.log("HELPERS DATA");
+					console.log(data);
+					var candidateNewsObject = {"id": candidateObj.id, "newsList": data};
+					console.log("CanddiateNewsObject");
+					console.log(candidateNewsObject);
+					newsArray.push(candidateNewsObject);
+				}));
+			});
+			Promise.all(promiseArray).then(function() {
+				console.log("NewsArray");
+				console.log(newsArray);
+				this.setState({
+					updatedOnce: true,
+					latestData: newsArray
 				});
-			}
-			
+			}.bind(this));
 		}
+
+
+		// if(!this.areArraysEqual(prevState.order, this.state.order) ) {
+		// 	console.log(prevState.order);
+		// 	// var previousLeader = this.getLeadingCandidate(this.state.candidatesArray, prevState.order);
+		// 	console.log(this.state.order);
+		// 	console.log("ORDER CHANGED!!!!!!!!!!!!!!");
+		// 	// Run query to get scraped data from 'The Onion'
+			
+		// }
 
 	// console.log("VictoryTest UPDATED");
 	},
@@ -93,20 +113,50 @@ var NewsPanel = React.createClass ({
 		return filteredArray[0].VoteCount;
 	},
 
-	getLeadingCandidate: function(candidatesArray, order) {
-		var leadingCandidateData = candidatesArray.filter((candidate) => candidate.id === order[0]);
-		if(leadingCandidateData.length) {
-			console.log(leadingCandidateData[0].name);
-		}
-		return leadingCandidateData[0].name;
-	},
+	// getLeadingCandidate: function(candidatesArray, order) {
+	// 	var leadingCandidateData = candidatesArray.filter((candidate) => candidate.id === order[0]);
+	// 	if(leadingCandidateData.length) {
+	// 		console.log(leadingCandidateData[0].id);
+	// 	}
+	// 	return leadingCandidateData[0].id;
+	// },
 
 
 	// Render the charts
 	render: function() {
+		// console.log(this.state.latestData);
+		// var currentOrder = this.state.order;
+		// var newsItem = {};
+		// // [{"id": 1, "newsList": [{},{},{},{}]},{},{},{},{}]
+		// this.state.latestData.forEach(function(item) {
+		// 	if(item.id === currentOrder[0]) {
+		// 		var newsArray = item.newsList;
+		// 		// console.log(newsList);
+		// 		var randomNumber = Math.floor(Math.random()*newsList.length);
+		// 		var tempNewsItem = newsList[randomNumber];
+		// 		if((tempNewsItem.headline !== "") && (tempNewsItem.image !== "") && (tempNewsItem.summary !== "")) {
+		// 			newsItem = newsList[randomNumber];
+		// 		}else {
+		// 			randomNumber = Math.floor(Math.random()*newsList.length);
+		// 		}
+		// 	}
+		// }.bind(this));
 	 	// console.log(candidateVotesData);
 		return (
-	      <h1>View Panel</h1>
+	      <div className="panel panel-default">
+			  <div className="panel-heading">
+			    <h2 className="panel-title">The Latest on The Leading Candidate</h2>
+			  </div>
+			  <div className="panel-body">
+			    <div className="row">
+			    	<div className="col-xs-3">
+			    		
+			    	</div>
+			    	<div className="col-xs-9">
+			    	</div>
+			    </div>
+			  </div>
+			</div>
 	    );
 	}
 });

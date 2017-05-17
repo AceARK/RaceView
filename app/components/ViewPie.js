@@ -73,6 +73,7 @@ var ViewPie = React.createClass ({
 	 			"votes": this.filterFunction(candidate)
 	 		}
 	 	});
+	 	// Ingenious method using reduce to convert array above to array of format [{party:votes},{party,votes},...]
 	 	var partyObject = candidateVotesData.reduce((obj, item) => {
 			if(!obj[item.party]) {
 	 			obj[item.party] = 0;
@@ -80,15 +81,14 @@ var ViewPie = React.createClass ({
 	 		obj[item.party] = obj[item.party] + item.votes;
 	 		return obj;
 	 	},{});
+	 	// Setting empty partyArray
 	 	var partyArray = [];
+	 	// Getting array of keys i.e. all the parties
 	 	var keyArray = Object.keys(partyObject);
+	 	// Creating an array with data party and votes labeled that way (to display pie)
 	 	keyArray.forEach((key) => {
 	 		partyArray.push({"party": key, "votes": partyObject[key]});
 	 	});
-	 	console.log(partyArray);
-
-	 	// console.log(partyObject);
-	 	// console.log(candidateVotesData);
 		return (
 	        <VictoryPie
 				data={partyArray}
