@@ -84,11 +84,14 @@ var ViewBar = React.createClass ({
 	          <VictoryAxis
 	            tickValues={this.state.candidatesArray.map((candidate) => this.getDisplayName(candidate.name))}
 	            style={{
-				  tickLabels: {fontSize: 13, padding: 5}
+				  tickLabels: {fontSize: 13, fontWeight: 900, padding: 5}
 				}}
 	          />
 	          <VictoryAxis
 	            dependentAxis
+	             style={{
+				  tickLabels: {fontSize: 13, fontWeight: 900, padding: 5}
+				}}
 	          />
 	          <VictoryStack
 	            colorScale={"warm"}
@@ -96,7 +99,7 @@ var ViewBar = React.createClass ({
 	            <VictoryBar
 	              data={candidateVotesData}
 	               style={{
-		            data: { width: 20 },
+		            data: { fill: "#b50c0c", width: 22 },
 		            labels: {fontSize: 20, fontWeight: 700},
 		          }}
 		          animate={{

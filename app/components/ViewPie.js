@@ -97,7 +97,7 @@ var ViewPie = React.createClass ({
 				colorScale={"cool"}
 				style={{
 					// data: {fill: (d) => d.y > 0 ? "red" : "blue"},
-					labels: {fontSize: 18, lineHeight: 10},
+					labels: {fontSize: 18, color: "grey", lineHeight: 10},
 					// parent: {border: "1px solid #ccc"}
 				}}
 				labels={keyArray.map((party) => `${party}
