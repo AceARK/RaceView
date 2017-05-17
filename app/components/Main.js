@@ -31,7 +31,7 @@ class Main extends React.Component {
 				    
 			      	<ul className="nav navbar-nav navbar-right">
 						<li><Link to="/">Dashboard</Link></li>
-						<li><Link to="/vote">Vote</Link></li>
+						<li><Link to="/openvote">Vote</Link></li>
 					</ul>
 				   
 				  </div>

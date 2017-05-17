@@ -130,7 +130,21 @@ var NewsPanel = React.createClass ({
 
 	// Render the charts
 	render: function() {
-	 	// console.log(candidateVotesData);
+		var leadingCandidateSrc = "";
+		if(this.state.candidatesArray.length && this.state.order.length) {
+			var candidateArray = this.state.candidatesArray;
+			var leadingId = this.state.order[0];
+			console.log(candidateArray);
+			console.log(leadingId);
+			for(var i=0; i< candidateArray.length; i++) {
+				if(candidateArray[i].id === leadingId) {
+					leadingCandidateSrc = `/assets/images/${candidateArray[i].photoSrc}`;
+				}
+			}
+			console.log(leadingCandidateSrc);
+			// var candidateImage = candidateObject.photoSrc;
+		 	// console.log(candidateImage);
+		}
 		return (
 	      <div className="newsPanel panel panel-default">
 			  <div className="panel-heading">
@@ -139,11 +153,12 @@ var NewsPanel = React.createClass ({
 			  <div className="panel-body">
 			    <div className="row">
 			    	<div className="col-xs-3">
-			    		<img src={(this.state.candidatesArray.filter((leader) => {if(leader.id === this.state.order[0]){ return leader.photoSrc }})).photoSrc} />
+			    		<img id="leadingCandidateImage" src={leadingCandidateSrc}/>
 			    	</div>
 			    	<div className="col-xs-9">
 			    		<h2>{this.state.currentNewsItem.headline}</h2>
 			    		<h5>{this.state.currentNewsItem.summary}</h5>
+			    		<small className="pull-right">- The Onion</small>
 			    	</div>
 			    </div>
 			  </div>

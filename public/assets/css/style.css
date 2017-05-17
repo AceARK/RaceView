@@ -176,3 +176,14 @@ body {
 button {
 	outline: none !important;
 }
+
+#leadingCandidateImage {
+	height: 200px;
+	width: auto;
+	border: 2px double grey;
+	border-radius: 10px;
+}
+
+h5 {
+	font-size: 14px;
+}
