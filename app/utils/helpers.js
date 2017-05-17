@@ -15,9 +15,9 @@ var helpers = {
 	
 	// Get latest news on leading candidate
 	getLatestNews: function(candidateName) {
-		console.log("Getting latest news on leading candidate");
+		// console.log("Getting latest news on leading candidate");
 		return axios.post("/scrape/latest", candidateName).then(function(response) {
-			console.log("AXIOS LATEST", response);
+			// console.log("AXIOS LATEST", response);
 			return response;
 		});
 	},
@@ -34,9 +34,9 @@ var helpers = {
 
 	// Get candidate list
 	getCandidateList: function() {
-		console.log("Getting candidate list");
+		// console.log("Getting candidate list");
 		return axios.get("/candidates/all").then(function(result){
-      		console.log("AXIOS GET CANDIDATES RESULTS", result);
+      		// console.log("AXIOS GET CANDIDATES RESULTS", result);
       		return result;
     	});
 	},

@@ -67,23 +67,23 @@ var NewsPanel = React.createClass ({
 		if(!this.state.latestData.length && !this.state.updatedOnce) {
 			var promiseArray = [];
 			var newsArray = [];
-			console.log("DID MOUNT CANDIDATES ARRAY");
-			console.log(this.state.candidatesArray);
+			// console.log("DID MOUNT CANDIDATES ARRAY");
+			// console.log(this.state.candidatesArray);
 			this.state.candidatesArray.forEach(function(candidateObj){
 				var candidateName = candidateObj.name;
-				console.log(candidateName);
+				// console.log(candidateName);
 				promiseArray.push(helpers.getLatestNews(candidateName).then(function(data) {
-					console.log("HELPERS DATA");
-					console.log(data);
+					// console.log("HELPERS DATA");
+					// console.log(data);
 					var candidateNewsObject = {"id": candidateObj.id, "newsList": data};
-					console.log("CanddiateNewsObject");
-					console.log(candidateNewsObject);
+					// console.log("CanddiateNewsObject");
+					// console.log(candidateNewsObject);
 					newsArray.push(candidateNewsObject);
 				}));
 			});
 			Promise.all(promiseArray).then(function() {
-				console.log("NewsArray");
-				console.log(newsArray);
+				// console.log("NewsArray");
+				// console.log(newsArray);
 				this.setState({
 					updatedOnce: true,
 					latestData: newsArray
@@ -92,7 +92,7 @@ var NewsPanel = React.createClass ({
 		}
 
 		if(this.state.order[0] !== prevState.order[0] && this.state.latestData) {
-			console.log("Inside news state set");
+			// console.log("Inside news state set");
 			var newsItem = this.getLatestNewsItem();
 			this.setState({
 				currentNewsItem: newsItem
@@ -111,20 +111,20 @@ var NewsPanel = React.createClass ({
 	},
 
 	getLatestNewsItem: function() {
-		console.log(this.state.latestData);
+		// console.log(this.state.latestData);
 		var currentOrder = this.state.order;
 		var newsItem = {};
 		// [{"id": 1, "newsList": [{},{},{},{}]},{},{},{},{}]
 		this.state.latestData.forEach(function(item) {
 			if(item.id === currentOrder[0]) {
 				var newsArray = item.newsList.data;
-				console.log(newsArray);
+				// console.log(newsArray);
 				var randomNumber = Math.floor(Math.random()*newsArray.length);
 				newsItem = newsArray[randomNumber];
 			}
 		}.bind(this));
-		console.log("LATEST NEWS ITEM ---->");
-		console.log(newsItem);
+		// console.log("LATEST NEWS ITEM ---->");
+		// console.log(newsItem);
 		return newsItem;
 	},
 
@@ -134,14 +134,14 @@ var NewsPanel = React.createClass ({
 		if(this.state.candidatesArray.length && this.state.order.length) {
 			var candidateArray = this.state.candidatesArray;
 			var leadingId = this.state.order[0];
-			console.log(candidateArray);
-			console.log(leadingId);
+			// console.log(candidateArray);
+			// console.log(leadingId);
 			for(var i=0; i< candidateArray.length; i++) {
 				if(candidateArray[i].id === leadingId) {
 					leadingCandidateSrc = `/assets/images/${candidateArray[i].photoSrc}`;
 				}
 			}
-			console.log(leadingCandidateSrc);
+			// console.log(leadingCandidateSrc);
 			// var candidateImage = candidateObject.photoSrc;
 		 	// console.log(candidateImage);
 		}

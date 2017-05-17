@@ -8,7 +8,7 @@ module.exports = function(app) {
 		
 		// var array = {"patti": "naaye", "candidateAId": req.body};
 		var candidateName = Object.keys(req.body)[0];
-		console.log(Object.keys(req.body)[0]);
+		// console.log(Object.keys(req.body)[0]);
 		var queryName = candidateName.split(" ").join("+");
 		// Prepare Onion url using candidate as search query
 		var queryURL = "http://www.theonion.com/search?q=" + queryName;
