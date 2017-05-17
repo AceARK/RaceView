@@ -11,7 +11,8 @@ var NewsPanel = React.createClass ({
 			votesArray: [],
 			order: [],
 			latestData: [],
-			updatedOnce: false
+			updatedOnce: false,
+			currentNewsItem: {}
 		}
 	},
 
@@ -90,17 +91,12 @@ var NewsPanel = React.createClass ({
 			}.bind(this));
 		}
 
-
-		// if(!this.areArraysEqual(prevState.order, this.state.order) ) {
-		// 	console.log(prevState.order);
-		// 	// var previousLeader = this.getLeadingCandidate(this.state.candidatesArray, prevState.order);
-		// 	console.log(this.state.order);
-		// 	console.log("ORDER CHANGED!!!!!!!!!!!!!!");
-		// 	// Run query to get scraped data from 'The Onion'
-			
-		// }
-
-	// console.log("VictoryTest UPDATED");
+		if(this.state.order !== prevState.order) {
+			var newsItem = this.getLatestNewsItem();
+			this.setState({
+				currentNewsItem: newsItem
+			});
+		}
 	},
 
 	// Filtering votesArray to get only voteCount specific to CandidateId
@@ -113,39 +109,48 @@ var NewsPanel = React.createClass ({
 		return filteredArray[0].VoteCount;
 	},
 
-	// getLeadingCandidate: function(candidatesArray, order) {
-	// 	var leadingCandidateData = candidatesArray.filter((candidate) => candidate.id === order[0]);
-	// 	if(leadingCandidateData.length) {
-	// 		console.log(leadingCandidateData[0].id);
-	// 	}
-	// 	return leadingCandidateData[0].id;
-	// },
+	getLatestNewsItem: function() {
+		console.log(this.state.latestData);
+		var currentOrder = this.state.order;
+		var newsItem = {};
+		// [{"id": 1, "newsList": [{},{},{},{}]},{},{},{},{}]
+		this.state.latestData.forEach(function(item) {
+			if(item.id === currentOrder[0]) {
+				var newsArray = item.newsList.data;
+				console.log(newsArray);
+				// console.log(newsList);
+				// console.log(tempNewsItem);
+				var recursionResult = this.recursionCodePiece(newsArray);
+				while(!recursionResult) {
+					recursionResult = this.recursionCodePiece(newsArray);
+				}
+				newsItem = recursionResult;
+			}
+		}.bind(this));
+		return newsItem;
+	},
 
+	recursionCodePiece: function(newsArray) {
+		var randomNumber = Math.floor(Math.random()*newsArray.length);
+		// console.log(randomNumber);
+		var tempNewsItem = newsArray[randomNumber];
+		console.log(tempNewsItem);
+		if((tempNewsItem.headline === "") || (tempNewsItem.image === "") || (tempNewsItem.summary === "")) {
+			return false;
+		}
+		return tempNewsItem;
+	},
 
+// <img className="newsImage" src={this.state.currentNewsItem.image}/>
+// <h1>{this.state.currentNewsItem.headline}</h1>
+// <h3>{this.state.currentNewsItem.summary}</h3>
 	// Render the charts
 	render: function() {
-		// console.log(this.state.latestData);
-		// var currentOrder = this.state.order;
-		// var newsItem = {};
-		// // [{"id": 1, "newsList": [{},{},{},{}]},{},{},{},{}]
-		// this.state.latestData.forEach(function(item) {
-		// 	if(item.id === currentOrder[0]) {
-		// 		var newsArray = item.newsList;
-		// 		// console.log(newsList);
-		// 		var randomNumber = Math.floor(Math.random()*newsList.length);
-		// 		var tempNewsItem = newsList[randomNumber];
-		// 		if((tempNewsItem.headline !== "") && (tempNewsItem.image !== "") && (tempNewsItem.summary !== "")) {
-		// 			newsItem = newsList[randomNumber];
-		// 		}else {
-		// 			randomNumber = Math.floor(Math.random()*newsList.length);
-		// 		}
-		// 	}
-		// }.bind(this));
 	 	// console.log(candidateVotesData);
 		return (
-	      <div className="panel panel-default">
+	      <div className="newsPanel panel panel-default">
 			  <div className="panel-heading">
-			    <h2 className="panel-title">The Latest on The Leading Candidate</h2>
+			    <h2 className="panel-title">Latest on The Leading Candidate</h2>
 			  </div>
 			  <div className="panel-body">
 			    <div className="row">
@@ -153,6 +158,8 @@ var NewsPanel = React.createClass ({
 			    		
 			    	</div>
 			    	<div className="col-xs-9">
+			    		
+			    		
 			    	</div>
 			    </div>
 			  </div>

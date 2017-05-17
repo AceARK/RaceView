@@ -94,7 +94,7 @@ var ViewPie = React.createClass ({
 				data={partyArray}
 				x="party"
 				y="votes"
-				colorScale={"heatmap"}
+				colorScale={"cool"}
 				style={{
 					// data: {fill: (d) => d.y > 0 ? "red" : "blue"},
 					labels: {fontSize: 18, lineHeight: 10},

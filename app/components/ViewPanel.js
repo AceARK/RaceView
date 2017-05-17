@@ -45,7 +45,7 @@ var ViewPanel = React.createClass ({
 	      		</div>
 	      	</div>
 	      	<div className="row">
-	      		<div className="col-sm-10 col-sm-offset-1">
+	      		<div className="col-sm-12">
 	      			<NewsPanel candidatesArray={this.state.candidatesArray}/>
 	      		</div>
 	      	</div>

@@ -55,10 +55,10 @@ var Tile = React.createClass ({
 						<img className="img-rounded" style={{style}} src={"/assets/images/" + this.state.imageSrc} alt={this.state.name} />
 					</div>
 					<div className="col-xs-5 text-center">
-						<p className="candidateName">{this.state.name}</p>
+						<p className="candidateName">{this.state.name.toUpperCase()}</p>
 					</div>
 					<div className="col-xs-4">
-						<p className="candidateVotes">{this.state.votes}</p>
+						<h4 className="candidateVotes">{this.state.votes}</h4>
 					</div>
 				</div>
 			</div>

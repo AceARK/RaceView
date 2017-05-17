@@ -22,7 +22,6 @@ class DashboardPage extends React.Component {
 	}
 
 	componentDidMount() {
-		// console.log("DID Mountttttt");
 		
 		// Get list of candidates in array format
 		helpers.getCandidateList().then(function(result) {
@@ -54,14 +53,9 @@ class DashboardPage extends React.Component {
 		}.bind(this));
 	}
 
-	componentDidUpdate() {
-		// console.log(this.state.candidatesArray);
-	}
-
 	render() {
 		return (
 			<div className="container-fluid">
-				<h1 className="text-center">DashboardPage</h1>
 				<div className="row">
 					<Dashboard candidatesArray = {this.state.candidatesArray}/>
 				</div>

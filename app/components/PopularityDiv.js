@@ -12,7 +12,7 @@ class PopularityDiv extends React.Component {
 
 	render() {
 		return(
-			<h1>PopularityDiv</h1>
+			<h1></h1>
 		);
 	}
 }

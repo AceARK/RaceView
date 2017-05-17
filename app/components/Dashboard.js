@@ -16,28 +16,29 @@ class Dashboard extends React.Component {
 		super(props);
 	}
 
-	componentWillMount() {
-		// console.log(this.props);
-	}
-
-	componentDidMount() {
-		// console.log(this.props.candidatesArray);
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		// console.log("Dashboard updated with : " + this.props.candidatesArray);
-	}
-
 	render() {
 		return (
 			<div className="dashboard container-fluid">
-				<h1 className="text-center">Dashboard</h1>
 				<div className="row">
-					<div className="col-sm-8">
-						<ViewPanel candidatesArray = {this.props.candidatesArray} />
+					<div className="col-sm-9">
+						<div className="newsPanel panel panel-default">
+							<div className="panel-heading">
+							    <h2 className="panel-title">RACE REPRESENTATION</h2>
+							</div>
+							<div className="panel-body">
+							   	<ViewPanel candidatesArray = {this.props.candidatesArray} />
+							</div>
+						</div>
 					</div>
-					<div className="col-sm-4">
-						<TileSet candidatesArray = {this.props.candidatesArray} />
+					<div className="col-sm-3">
+						<div className="newsPanel panel panel-default">
+							<div className="panel-heading text-center">
+							    <h2 className="panel-title">THE RACE</h2>
+							</div>
+							<div className="panel-body">
+							   	<TileSet candidatesArray = {this.props.candidatesArray} />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>	

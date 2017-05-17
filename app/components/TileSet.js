@@ -21,14 +21,12 @@ var TileSet = React.createClass ({
 			votesArray: [],
 			order: [],
 			animationTrigger: 0,
-			style: ""
+			tileStyle: ""
 		}
 	},
 
 	 componentDidMount: function() {
-	  // var socket = io.connect('/');
 	    socket.on('broadcast', function(voteData) {
-	//         console.log('Somebody Voted Yo!', voteData);
 			var orderedVoteData = voteData.sort((a,b) => b.VoteCount -a.VoteCount);
 			var order = orderedVoteData.map((data) => data.CandidateId);
 	       	// Setting vote Data
@@ -46,19 +44,8 @@ var TileSet = React.createClass ({
 		return true;
 	},
 
-	// areArraysEqual: function(one, two) {
-	// 	for(var i=0; i<one.length; i++) {
-	// 		if(one[i] !== two[i]) {
-	// 			return false;
-	// 		}
-	// 	}
-	// 	return true;
-	// },
-
 	// Based on emit, update votes for tiles
 	componentDidUpdate: function(prevProps, prevState) {
-		// console.log(this.props.candidatesArray);
-		// console.log(this.state.candidatesArray);
 		// Avoiding max call stack error
 		if(prevProps !== this.props) {
 			var parentArray = this.props.candidatesArray;
@@ -67,20 +54,14 @@ var TileSet = React.createClass ({
 			});
 		} 
 
-		// if(!this.areArraysEqual(prevState.order, this.state.order) ) {
-		// 	console.log(prevState.order);
-		// 	console.log(this.state.order);
-		// 	console.log("ORDER CHANGED!!!!!!!!!!!!!!");
-		// 	var newRandom = Math.random()*100;
-		// 	// this.setState = {
-		// 	// 	animationTrigger : newRandom,
-		// 	// 	style: `${this.state.style} animateTile`
-		// 	// }
-		// }
-
-		// console.log("TileSET UPDATED");
+		if(prevState.order !== this.state.order) {
+			this.setState({
+				tileStyle: "animateTile"
+			});
+		}
 	},
 
+	// Filtering voteCount of a particular candidate
 	filterFunction: function(item) {
 		var filteredArray = this.state.votesArray.filter((voteItem) => voteItem.CandidateId === item.id);
 		if(!filteredArray.length) {
@@ -90,7 +71,7 @@ var TileSet = React.createClass ({
 		return filteredArray[0].VoteCount;
 	},
 
-// {(this.state.votesArray.filter((item) =>  item.CandidateId === candidate.id)).votes}
+	// Render function
 	render: function() {
 		var candidateVotesData = this.state.candidatesArray.map((candidate) => {
 	 		return {
@@ -103,10 +84,14 @@ var TileSet = React.createClass ({
 	 	});
 	 	// console.log(candidateVotesData);
 		return (
-			<div className="tileSet">
+			<div className="tileSet text-center">
 				{(candidateVotesData.length) ? candidateVotesData.sort((a,b) => b.votes - a.votes).map((candidate) => {
 						return (
-							<Tile style={this.state.style} key={candidate.id} name={candidate.name} photoSrc={candidate.photo} party={candidate.party} votes={candidate.votes} />
+							<div className="row">
+								<div className="col-xs-12">
+									<Tile style={this.state.tileStyle} key={candidate.id} name={candidate.name} photoSrc={candidate.photo} party={candidate.party} votes={candidate.votes} />
+								</div>
+							</div>
 						);
 				}): null }
 			</div>
