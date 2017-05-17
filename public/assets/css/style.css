@@ -73,10 +73,24 @@ body {
 	height: 85px;
 }
 
-.candidateTile p , .candidateTile h4{
+.candidateTile p{
   background-color: #333333;
   color: transparent;
   text-shadow: 0px 2px 3px rgba(255,255,255,0.3);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+	/*text-transform: capitalize !important;*/
+	margin-top: 10px;
+	margin-bottom: -5px;
+	font-size: 15px;
+	font-weight: 900;
+}
+
+.candidateTile h3 {
+	/*background-color: white;*/
+  color: #efefef;
+  text-shadow: 0px 4px 5px rgba(0,0,0,0.5);
   -webkit-background-clip: text;
      -moz-background-clip: text;
           background-clip: text;
@@ -111,6 +125,7 @@ body {
 .newsPanel {
 	margin-right: 10px;
 	margin-left: 10px;
+	min-height: 280px;
 }
 
 .panel-default > .panel-heading {
@@ -127,4 +142,37 @@ body {
      -moz-background-clip: text;
           background-clip: text;
           font-weight: 900;
+}
+
+#candidateList {
+	border: 2px solid grey;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+.voteImage {
+	width: 65px;
+	height: 90px;
+	box-shadow: inset 0px 0px 30px 30px rgba(0,0,0,1);
+  	border: 3px solid grey;
+  	border-radius: 5px;
+	margin: 5px;
+}
+
+.voteTile {
+	border: 2px solid grey;
+	border-radius: 10px;
+	padding: 5px;
+	box-shadow: 0px 0px 4px 5px rgba(0,0,0,0.3);
+	margin: 20px;
+	display: inline;
+	width: 40%;
+}
+
+.vote {
+	margin-top: 50px;
+}
+
+button {
+	outline: none !important;
 }

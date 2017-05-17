@@ -21,20 +21,22 @@ module.exports = function(app) {
 		    // Iterating over each required element
 		    $(".summary>.info>.inner>.share-container>.share-tools.share-widget").each(function(j, element) {
 		    	// Capturing required properties of each element into variables
-		    	if(j <= 5) {
+		    	if(newsArray.length < 5) {
 		    		var headline = $(element).attr("data-share-title").trim();
 			    	var summary = $(element).attr("data-share-description").trim();
-			    	var image = $(element).attr("data-share-image").trim();
+			    	// var image = $(element).attr("data-share-image").trim();
 
 				    // Initialize result object
 				    var news = {};
-	
-				    // Add the headline, link, summary and byline of each to result object
-				    news.headline = headline;
-				    news.summary = summary;
-				    news.image = image;
+					if(headline !== "" && summary !== "" && !headline.includes("Built-In Search Engine Just Pathetic")) {
+						 // Add the headline, link, summary and byline of each to result object
+					    news.headline = headline;
+					    news.summary = summary;
+					    // news.image = image;
 
-				 	newsArray.push(news);   
+					 	newsArray.push(news);  
+					}
+				    
 		    	} 
 		    });	
 		    res.json(newsArray);

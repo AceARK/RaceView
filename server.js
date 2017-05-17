@@ -4,6 +4,9 @@ var bodyParser = require("body-parser");
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
 
+// ----  For Demo purpose only ----//
+var path = require('path');
+
 // Set up express app and port
 var app = express();
 var PORT = process.env.PORT || 8080;
@@ -23,6 +26,14 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //After the body is parsed, it's time for validation
 //this starts the express validator
 app.use(expressValidator());
+
+// ----  For Demo purpose only ----//
+
+// Serving openvote page
+app.get("/openvote",function(req, res) {
+	res.sendFile(path.join(__dirname, "/public/openvote.html"));
+});
+// ---- End: For Demo purpose only ----//
 
 // Serving static files
 app.use(express.static("./public"));

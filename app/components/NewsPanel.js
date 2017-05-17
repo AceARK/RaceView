@@ -91,7 +91,8 @@ var NewsPanel = React.createClass ({
 			}.bind(this));
 		}
 
-		if(this.state.order !== prevState.order) {
+		if(this.state.order[0] !== prevState.order[0] && this.state.latestData) {
+			console.log("Inside news state set");
 			var newsItem = this.getLatestNewsItem();
 			this.setState({
 				currentNewsItem: newsItem
@@ -118,32 +119,15 @@ var NewsPanel = React.createClass ({
 			if(item.id === currentOrder[0]) {
 				var newsArray = item.newsList.data;
 				console.log(newsArray);
-				// console.log(newsList);
-				// console.log(tempNewsItem);
-				var recursionResult = this.recursionCodePiece(newsArray);
-				while(!recursionResult) {
-					recursionResult = this.recursionCodePiece(newsArray);
-				}
-				newsItem = recursionResult;
+				var randomNumber = Math.floor(Math.random()*newsArray.length);
+				newsItem = newsArray[randomNumber];
 			}
 		}.bind(this));
+		console.log("LATEST NEWS ITEM ---->");
+		console.log(newsItem);
 		return newsItem;
 	},
 
-	recursionCodePiece: function(newsArray) {
-		var randomNumber = Math.floor(Math.random()*newsArray.length);
-		// console.log(randomNumber);
-		var tempNewsItem = newsArray[randomNumber];
-		console.log(tempNewsItem);
-		if((tempNewsItem.headline === "") || (tempNewsItem.image === "") || (tempNewsItem.summary === "")) {
-			return false;
-		}
-		return tempNewsItem;
-	},
-
-// <img className="newsImage" src={this.state.currentNewsItem.image}/>
-// <h1>{this.state.currentNewsItem.headline}</h1>
-// <h3>{this.state.currentNewsItem.summary}</h3>
 	// Render the charts
 	render: function() {
 	 	// console.log(candidateVotesData);
@@ -155,11 +139,11 @@ var NewsPanel = React.createClass ({
 			  <div className="panel-body">
 			    <div className="row">
 			    	<div className="col-xs-3">
-			    		
+			    		<img src={(this.state.candidatesArray.filter((leader) => {if(leader.id === this.state.order[0]){ return leader.photoSrc }})).photoSrc} />
 			    	</div>
 			    	<div className="col-xs-9">
-			    		
-			    		
+			    		<h2>{this.state.currentNewsItem.headline}</h2>
+			    		<h5>{this.state.currentNewsItem.summary}</h5>
 			    	</div>
 			    </div>
 			  </div>
