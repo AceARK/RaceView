@@ -12,7 +12,8 @@ var NewsPanel = React.createClass ({
 			order: [],
 			latestData: [],
 			updatedOnce: false,
-			currentNewsItem: {}
+			currentNewsItem: {},
+			hasCurrentNews: false
 		}
 	},
 
@@ -39,6 +40,7 @@ var NewsPanel = React.createClass ({
 	shouldComponentUpdate: function(nextProps, nextState) {
 		// console.log(nextProps);
 		// console.log(nextState);
+
 		return true;
 	},
 
@@ -51,6 +53,7 @@ var NewsPanel = React.createClass ({
 		}
 		return true;
 	},
+
 
 	// Based on emit, update votes for tiles
 	componentDidUpdate: function(prevProps, prevState) {
@@ -89,6 +92,14 @@ var NewsPanel = React.createClass ({
 					latestData: newsArray
 				});
 			}.bind(this));
+		}
+
+		if(!this.state.hasCurrentNews) {
+			var newsItem = this.getLatestNewsItem();
+			this.setState({
+				currentNewsItem: newsItem,
+				hasCurrentNews: true
+			});
 		}
 
 		if(this.state.order[0] !== prevState.order[0] && this.state.latestData) {
@@ -136,14 +147,17 @@ var NewsPanel = React.createClass ({
 			var leadingId = this.state.order[0];
 			// console.log(candidateArray);
 			// console.log(leadingId);
+			if(Object.getOwnPropertyNames(this.state.currentNewsItem).length === 0) {
+				var newsItem = this.getLatestNewsItem();
+				this.setState({
+					currentNewsItem: newsItem
+				});
+			}
 			for(var i=0; i< candidateArray.length; i++) {
 				if(candidateArray[i].id === leadingId) {
 					leadingCandidateSrc = `/assets/images/${candidateArray[i].photoSrc}`;
 				}
 			}
-			// console.log(leadingCandidateSrc);
-			// var candidateImage = candidateObject.photoSrc;
-		 	// console.log(candidateImage);
 		}
 		return (
 	      <div className="newsPanel panel panel-default">
