@@ -23,9 +23,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-//After the body is parsed, it's time for validation
-//this starts the express validator
+
+// Validate using express validator after body parsing
 app.use(expressValidator());
+
+// Using express session for session management
+app.use(expressSession({
+	secret: 'raceview secret',
+	// Don't save a session if not initialized 
+	saveUninitialized: false,
+	// Save session again only in case of changes
+	resave: false
+}));
 
 // ----  For Demo purpose only ----//
 
