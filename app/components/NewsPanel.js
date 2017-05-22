@@ -147,12 +147,12 @@ var NewsPanel = React.createClass ({
 			var leadingId = this.state.order[0];
 			// console.log(candidateArray);
 			// console.log(leadingId);
-			if(Object.getOwnPropertyNames(this.state.currentNewsItem).length === 0) {
-				var newsItem = this.getLatestNewsItem();
-				this.setState({
-					currentNewsItem: newsItem
-				});
-			}
+			// if(this.state.currentNewsItem["headline"] == null || this.state.currentNewsItem["headline"] == undefined) {
+			// 	var newsItem = this.getLatestNewsItem();
+			// 	this.setState({
+			// 		currentNewsItem: newsItem
+			// 	});
+			// }
 			for(var i=0; i< candidateArray.length; i++) {
 				if(candidateArray[i].id === leadingId) {
 					leadingCandidateSrc = `/assets/images/${candidateArray[i].photoSrc}`;

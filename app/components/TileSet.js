@@ -39,8 +39,6 @@ var TileSet = React.createClass ({
 	  },
 
 	shouldComponentUpdate: function(nextProps, nextState) {
-		// console.log(nextProps);
-		// console.log(nextState);
 		return true;
 	},
 

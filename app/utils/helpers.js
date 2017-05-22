@@ -22,14 +22,6 @@ var helpers = {
 		});
 	},
 
-	// getLatestShit: function(candidateId) {
-	// 	console.log("Getting latest news on leading candidate");
-	// 	return axios.post("/scrape/test", candidateId).then(function(response) {
-	// 		console.log("AXIOS CANDIDATES LATEST", response);
-	// 		return response;
-	// 	});
-	// },
-
 // Candidate specific helpers
 
 	// Get candidate list
@@ -67,7 +59,7 @@ var helpers = {
 	addUser: function(userData) {
 		console.log("Adding user");
 		// userData - json object with username, email, password
-		return axios.post("/add/user", userData).then(function(result) {
+		return axios.post("/register/user", userData).then(function(result) {
 			console.log("ADDING USER", result);
 			return result;
 		});
@@ -86,9 +78,11 @@ var helpers = {
 	// Authenticate user
 	authenticateUser: function(userData) {
 		console.log("Authenticating user");
+		console.log(userData);
 		// userData - json object with email and password
-		return axios.post("/authenticate", userData).then(function(result) {
+		return axios.post("/login", userData).then(function(result) {
 			console.log("AUTHENTICATED USER", result);
+			return result;
 			// return result;
 		});
 	},

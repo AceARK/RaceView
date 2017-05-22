@@ -3,6 +3,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
+var logger = require('morgan');
 
 // ----  For Demo purpose only ----//
 var path = require('path');
@@ -19,6 +20,7 @@ var io = require("socket.io")(http);
 var db = require("./models");
 
 // Set up Express app to handle data parsing
+app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -39,9 +41,9 @@ app.use(expressSession({
 // ----  For Demo purpose only ----//
 
 // Serving openvote page
-app.get("/openvote",function(req, res) {
-	res.sendFile(path.join(__dirname, "/public/openvote.html"));
-});
+// app.get("/openvote",function(req, res) {
+// 	res.sendFile(path.join(__dirname, "/public/openvote.html"));
+// });
 // ---- End: For Demo purpose only ----//
 
 // Serving static files

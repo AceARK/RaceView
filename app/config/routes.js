@@ -31,6 +31,7 @@ module.exports = (
     {/* Routing for Main component */}
     <Route path="/" component={Main}>
       <IndexRoute component={DashboardPage} />
+      <Route path="openvote" component={UserPortal} />
     </Route>
     <Route path="*" component={Error404} />
   </Router>

@@ -14,7 +14,7 @@ class UserPortal extends React.Component {
 		return(
 			<div>
 				<h1 className="text-center">UserPortal</h1>
-				<Candidates setParentProps={this.setParentProps} />
+				
 			</div>
 		);
 	}

@@ -16,8 +16,6 @@ var ViewPanel = React.createClass ({
 
 	// Area to stop cyclic updation and max call stack error
 	shouldComponentUpdate: function(nextProps, nextState) {
-		// console.log(nextProps);
-		// console.log(nextState);
 		return true;
 	},
 
