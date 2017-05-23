@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import Login from './Login.js';
 import helpers from '../utils/helpers.js';
 
 class Main extends React.Component {
@@ -16,8 +15,7 @@ class Main extends React.Component {
 		}
 	}
 
-	// <li><Link to="/">Dashboard</Link></li>
-	// <li><Link to="/openvote">Vote</Link></li>
+	//<li><Link to="/openvote">Vote</Link></li>
 
 	render() {
 		return (
@@ -30,7 +28,7 @@ class Main extends React.Component {
 				    </div>
 				    
 			      	<ul className="nav navbar-nav navbar-right">
-			      		<Login />
+						<li><Link to="/securevote">Vote</Link></li>
 					</ul>
 				   
 				  </div>

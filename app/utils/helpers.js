@@ -56,11 +56,12 @@ var helpers = {
 // User spefic helpers
 
 	// Adding a user
-	addUser: function(userData) {
-		console.log("Adding user");
+	registerUser: function(userData) {
+		console.log("Registering user");
+		console.log(userData);
 		// userData - json object with username, email, password
 		return axios.post("/register/user", userData).then(function(result) {
-			console.log("ADDING USER", result);
+			console.log("REGISTERING USER", result);
 			return result;
 		});
 	},
@@ -76,14 +77,13 @@ var helpers = {
 	},
 
 	// Authenticate user
-	authenticateUser: function(userData) {
+	authenticateUser: function(loginData) {
 		console.log("Authenticating user");
-		console.log(userData);
+		console.log(loginData);
 		// userData - json object with email and password
-		return axios.post("/login", userData).then(function(result) {
+		return axios.post("/login", loginData).then(function(result) {
 			console.log("AUTHENTICATED USER", result);
 			return result;
-			// return result;
 		});
 	},
 

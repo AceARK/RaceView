@@ -42,18 +42,24 @@ var LoginForm = React.createClass({
 			if(result.data === "Login failed") {
 				this.props.showErrorMessage(true);
 			}else {
-				this.props.hideForm(false);
+				this.props.showForm(false);
 			}
 		}.bind(this));
 		
 	},
 
-	render: function() {
+	render: function() { 
 		return (
 			<form onSubmit={this.handleLoginButtonClick}>
-				<div className="loginForm form-group form-inline">
-					<input type="email" id="email" onChange={this.handleChange} className="form-control" placeholder="Email" name="email" required />
-					<input type="password" id="password" onChange={this.handleChange} className="form-control" placeholder="Password" name="password" required />
+				<div className="loginForm">
+					<div className="form-group">
+						<label for="email">Email: </label>
+						<input type="email" id="email" onChange={this.handleChange} value={this.state.email} className="form-control" placeholder="Email" name="email" required />
+					</div>
+					<div className="form-group">
+						<label for="password">Password: </label>
+						<input type="password" id="password" onChange={this.handleChange} value={this.state.password} className="form-control" placeholder="Password" name="password" required />
+					</div>
 					<button id="loginToVoteButton" className="btn btn-success">Login</button>
 				</div>
 			</form>
