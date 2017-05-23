@@ -19,7 +19,9 @@ var UserPortal = React.createClass({
 			userVoted: false,
 			candidatesArray: [],
 			registerFormVisible: false,
-			newUserLogin: false
+			newUserLogin: false,
+			loginError: "",
+			sessionObject: {}
 		}
 	},
 
@@ -60,9 +62,10 @@ var UserPortal = React.createClass({
 		});
 	},
 
-	showErrorMessage: function(value) {
+	showErrorMessage: function(value, errmsg) {
 		this.setState({
-			errorMessageVisible: value
+			errorMessageVisible: value,
+			loginError: errmsg
 		});
 	},
 
@@ -82,17 +85,11 @@ var UserPortal = React.createClass({
 		});
 	},
 
-	showForm: function(value) {
-		this.setState({
-			formVisible: value
-		});
-	},
-
-	resetLogin: function() {
+	userLoggedIn: function(sessionObj) {
 		this.setState({
 			formVisible: false,
-			userSignedIn: false,
-			errorMessageVisible: false
+			sessionObject: sessionObj,
+			userSignedIn: true
 		});
 	},
 
@@ -117,6 +114,15 @@ var UserPortal = React.createClass({
 							</div>
 						</div>
 					 : null}
+					 {(this.state.errorMessageVisible) ? 
+					 	<div className="row">
+							<div className="col-xs-10 col-xs-offset-1 text-center">
+								<div className="alert alert-danger">
+									<p>{this.state.loginError}</p>
+								</div>
+							</div>
+						</div>
+					 :null}
 					<div className="row">
 						<div className="col-xs-8 col-xs-offset-2">
 							<h3>Login to Vote</h3>
@@ -124,7 +130,7 @@ var UserPortal = React.createClass({
 					</div>
 					<div className="row">
 						<div className="col-xs-6 col-xs-offset-3">
-							<LoginForm showForm = {this.showForm} />
+							<LoginForm showErrorMessage={this.showErrorMessage} userLoggedIn={this.userLoggedIn} />
 						</div>
 					</div>
 					{(!this.state.newUserLogin) ? 
@@ -140,8 +146,12 @@ var UserPortal = React.createClass({
 			);
 		}else if(this.state.userSignedIn && !this.state.userVoted && !this.state.formVisible && !this.state.registerFormVisible){
 			// var candidatesArray = this.state.candidatesArray;
+			var username = this.state.sessionObject.username;
+			var userId = this.state.sessionObject.id;
 			return(
-				<h1>User voting area</h1>
+				<div className="row">
+					<h3>User voting area</h3>
+				</div>
 			);
 			// candidatesArray.map((candidate) => {
 			// 		return (

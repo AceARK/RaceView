@@ -209,12 +209,6 @@ h5 {
 }
 
 .alert-danger {
-	height: 40px;
-	margin-top: -8px;
-	margin-bottom: -40px;
+	margin-top: 20px;
 	border: 2px solid #A80001;
-}
-
-.alert-danger>p {
-	margin-top: -8px;
 }

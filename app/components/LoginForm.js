@@ -38,14 +38,14 @@ var LoginForm = React.createClass({
 			password: loginPassword
 		}
 		helpers.authenticateUser(loginData).then(function(result) {
-			console.log(result.data);
+			var errMsg = result.data;
 			if(result.data === "Login failed") {
-				this.props.showErrorMessage(true);
+				this.props.showErrorMessage(true, errMsg);
 			}else {
-				this.props.showForm(false);
+				// Setting parent with new session object
+				this.props.userLoggedIn(result.data);
 			}
 		}.bind(this));
-		
 	},
 
 	render: function() { 

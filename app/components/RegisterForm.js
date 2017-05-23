@@ -37,16 +37,24 @@ var RegisterForm = React.createClass({
 			username: registerUsername
 		}
 		helpers.registerUser(userData).then(function(result) {
-			console.log(result.data);
+			// Setting error message given by sequelize query check for email or username already in use
 			if(result.data.includes("already in use")) {
+				var errorMessage = result.data;
 				this.setState({
-					errorInRegistration: true
+					errorInRegistration: true,
+					errorMessage: errorMessage
 				});
+			}else if(result.data[0].msg) {
+				// Setting error message from express validator to display
+				var errorMessage = result.data[0].msg;
+				this.setState({
+					errorInRegistration: true,
+					errorMessage: errorMessage
+				});
+				
 			}else {
 				this.props.registrationComplete();
-				this.resetForm();
 			}
-			// 
 		}.bind(this));
 	},
 
@@ -56,7 +64,8 @@ var RegisterForm = React.createClass({
 			password: "",
 			passwordConfirm: "",
 			username: "",
-			alertDangerstyle: "hidden"
+			errorInRegistration: false,
+			errorMessage: ""
 		});
 	},
 
@@ -80,10 +89,11 @@ var RegisterForm = React.createClass({
 					<input type="password" onChange={this.handleChange} id="passwordConfirm" value={this.state.passwordConfirm} className="form-control" placeholder="Confirm password" name="passwordConfirm" />
 				</div>
 				<button type="submit" className="btn btn-info">Submit</button>
-
-				<div className="{this.state.style} alert alert-danger">
-
-				</div>
+				{(this.state.errorInRegistration) ? 
+					<div className="alert alert-danger">
+						<p>{this.state.errorMessage}</p>
+					</div>
+				: null}
 			</form> 
 		);
 	}

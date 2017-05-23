@@ -103,12 +103,21 @@ module.exports = function(app) {
             // remaking hashed password to compare
             var hashedPassword = sha512(req.body.password, salt).passwordHash;
             if (hashedPassword === data.hash) {
+                var email = data.email;
+                var id = data.id;
+                var username = data.username;
             	// Get session variables to use for display/validation purposes
-                session.uniqueID = [data.email, data.role, data.id, data.username];
+                session.uniqueID = [email, data.role, id, username];
                 if (data.role === "admin") {
                     res.json("Admin logged in.");
                 } else if (data.role === "user") {
-                    res.json("User " + data.username + " logged in successfully.");
+                    // Creating sessionObject to send to client
+                    var sessionObject = {
+                        "email": email,
+                        "id": id,
+                        "username": username
+                    };
+                    res.json(sessionObject);
                 } else {
                     console.log('No role found');
                 }
