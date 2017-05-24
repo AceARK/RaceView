@@ -172,7 +172,7 @@ var NewsPanel = React.createClass ({
 			    	<div className="col-xs-9">
 			    		<h2>{this.state.currentNewsItem.headline}</h2>
 			    		<h5>{this.state.currentNewsItem.summary}</h5>
-			    		<small className="pull-right">- The Onion</small>
+			    		<h5 className="pull-right">- The Onion</h5>
 			    	</div>
 			    </div>
 			  </div>
