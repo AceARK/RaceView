@@ -110,8 +110,15 @@ var UserPortal = React.createClass({
 		}
 		helpers.addVoteByUser(voteData).then(function(result) {
 			console.log(result);
+			if(result.data.id == undefined || result.data.id == null) {
+				// Error handling
+			}else {
+				this.setState({
+					userVoted: true
+				});
+			}
 			// Set userVoted flag
-		});
+		}.bind(this));
 	},
 
 	render: function() {
@@ -196,7 +203,7 @@ var UserPortal = React.createClass({
 								})}
 							</div>
 						: 
-							<h2>You have already cast your vote. Please visit the Dashboard page to view the race.</h2>
+							<h2>You have cast your vote. Please visit the Dashboard page to view the race.</h2>
 						}
 						
 					</div>
