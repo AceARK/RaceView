@@ -133,7 +133,7 @@ var UserPortal = React.createClass({
 								</div>
 							</div>
 						</div>
-					 : null}
+					 : null} 
 					 {(this.state.errorMessageVisible) ? 
 					 	<div className="row">
 							<div className="col-xs-10 col-xs-offset-1 text-center">
