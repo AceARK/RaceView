@@ -111,13 +111,27 @@ module.exports = function(app) {
                 if (data.role === "admin") {
                     res.json("Admin logged in.");
                 } else if (data.role === "user") {
-                    // Creating sessionObject to send to client
-                    var sessionObject = {
-                        "email": email,
-                        "id": id,
-                        "username": username
-                    };
-                    res.json(sessionObject);
+                    // Checking if user has already voted
+                    db.Vote.findAll({
+                        where: {
+                            UserId: id
+                        }
+                    }).then(function(data) {
+                        var votedBoolean = false;
+                        if(data.length) {
+                            votedBoolean = true;
+                        }else {
+                            votedBoolean = false;
+                        }
+                        // Creating sessionObject to send to client
+                        var sessionObject = {
+                            "email": email,
+                            "id": id,
+                            "username": username,
+                            "voted": votedBoolean
+                        };
+                        res.json(sessionObject);
+                    });
                 } else {
                     console.log('No role found');
                 }

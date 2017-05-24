@@ -85,11 +85,12 @@ var UserPortal = React.createClass({
 		});
 	},
 
-	userLoggedIn: function(sessionObj) {
+	userLoggedIn: function(sessionObj, votedFlag) {
 		this.setState({
 			formVisible: false,
 			sessionObject: sessionObj,
-			userSignedIn: true
+			userSignedIn: true,
+			userVoted: votedFlag
 		});
 	},
 
@@ -209,8 +210,6 @@ var UserPortal = React.createClass({
 					</div>
 				</div>
 			);
-			// Call helpers.getCandidates method to get all candidates, and populate below with id for each
-			// so clicking vote once will update vote and hide this voting section
 		} else if(this.state.registerFormVisible && !this.state.formVisible && !this.state.userSignedIn) {
 			return(
 				<div className="row">

@@ -42,8 +42,13 @@ var LoginForm = React.createClass({
 			if(result.data === "Login failed") {
 				this.props.showErrorMessage(true, errMsg);
 			}else {
+				var sessionObject = {
+					"email" : result.data.email,
+					"id" : result.data.id,
+					"username" : result.data.username
+				}
 				// Setting parent with new session object
-				this.props.userLoggedIn(result.data);
+				this.props.userLoggedIn(sessionObject, result.data.voted);
 			}
 		}.bind(this));
 	},
