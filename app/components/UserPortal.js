@@ -101,6 +101,19 @@ var UserPortal = React.createClass({
 		});
 	},
 
+	handleVoteClick: function(event) {
+		var candidateId = event.target.id;
+		console.log(candidateId);
+		var voteData = {
+			"userId" : this.state.sessionObject.id,
+			"candidateId" : candidateId
+		}
+		helpers.addVoteByUser(voteData).then(function(result) {
+			console.log(result);
+			// Set userVoted flag
+		});
+	},
+
 	render: function() {
 		if(!this.state.userSignedIn && !this.state.userVoted && this.state.formVisible) {
 			return(
@@ -144,38 +157,51 @@ var UserPortal = React.createClass({
 					:null}
 				</div>
 			);
-		}else if(this.state.userSignedIn && !this.state.userVoted && !this.state.formVisible && !this.state.registerFormVisible){
+		}else if(this.state.userSignedIn && !this.state.formVisible && !this.state.registerFormVisible){
 			// var candidatesArray = this.state.candidatesArray;
 			var username = this.state.sessionObject.username;
 			var userId = this.state.sessionObject.id;
+			var candidatesArray = this.state.candidatesArray;
 			return(
 				<div className="row">
-					<h3>User voting area</h3>
+					<div className="col-xs-10 col-xs-offset-1">
+						<h3>Greetings {username}</h3>
+						{(!this.state.userVoted ) ? 
+							<div>
+								<h3>Cast your vote for your candidate.</h3>
+								<h5>Please note that you may only vote once.</h5>
+								{candidatesArray.map((candidate) => {
+									var photoSrc = `/assets/images/${candidate.photoSrc}`;
+									return (
+										<div className="voteTile text-center col-xs-6">
+											<div className='row'>
+												<div className='col-xs-5'>
+													<div className='row'>
+														<div className='col-xs-12'>
+															<img className='voteImage' src={photoSrc} />
+														</div>
+													</div>
+													<div className='row'>
+														<div className='col-xs-12'>
+															<h4 className='candidateName'>{candidate.name}</h4>
+														</div>
+													</div>
+												</div>
+												<div className='col-xs-7'>
+													<button id={candidate.id} onClick={this.handleVoteClick} className='vote btn btn-lg btn-danger'>Vote</button>
+												</div>
+											</div>
+										</div>
+									);
+								})}
+							</div>
+						: 
+							<h2>You have already cast your vote. Please visit the Dashboard page to view the race.</h2>
+						}
+						
+					</div>
 				</div>
 			);
-			// candidatesArray.map((candidate) => {
-			// 		return (
-			// 			<div className="col-xs-6">
-			// 				<div class='row'>
-			// 					<div class='col-xs-5'>
-			// 						<div class='row'>
-			// 							<div class='col-xs-12'>
-			// 								<img class='voteImage' src='/assets/images/{candidate.photoSrc}' />
-			// 							</div>
-			// 						</div>
-			// 						<div class='row'>
-			// 							<div class='col-xs-12'>
-			// 								<h4 class='candidateName'>{candidate.name}</h4>
-			// 							</div>
-			// 						</div>
-			// 					</div>
-			// 					<div class='col-xs-7'>
-			// 						<button id={candidate.id} class='vote btn btn-lg btn-danger'>Vote</button>
-			// 					</div>
-			// 				</div>
-			// 			</div>
-			// 		);
-			// 	});
 			// Call helpers.getCandidates method to get all candidates, and populate below with id for each
 			// so clicking vote once will update vote and hide this voting section
 		} else if(this.state.registerFormVisible && !this.state.formVisible && !this.state.userSignedIn) {
