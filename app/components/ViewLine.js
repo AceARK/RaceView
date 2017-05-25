@@ -57,6 +57,10 @@ var ViewPie = React.createClass ({
 		return filteredArray[0].VoteCount;
 	},
 
+	componentWillUnmount(){
+    	socket.close();
+  	},
+
 	getDisplayName: function(fullName) {
 		var displayName = "";
 		var nameArray = fullName.split(" "); 

@@ -65,6 +65,10 @@ var ViewPie = React.createClass ({
 		return displayName;
 	},
 
+	componentWillUnmount(){
+    	socket.close();
+  	},
+
 	// Render the charts
 	render: function() {
 		var candidateVotesData = this.state.candidatesArray.map((candidate) => {

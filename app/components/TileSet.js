@@ -69,6 +69,10 @@ var TileSet = React.createClass ({
 		return filteredArray[0].VoteCount;
 	},
 
+	componentWillUnmount(){
+    	socket.close();
+  	},
+
 	// Render function
 	render: function() {
 		var candidateVotesData = this.state.candidatesArray.map((candidate) => {

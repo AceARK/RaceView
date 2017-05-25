@@ -139,6 +139,10 @@ var NewsPanel = React.createClass ({
 		return newsItem;
 	},
 
+	componentWillUnmount(){
+    	socket.close();
+  	},
+
 	// Render the charts
 	render: function() {
 		var leadingCandidateSrc = "";
