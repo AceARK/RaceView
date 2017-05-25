@@ -43,12 +43,12 @@ var Tile = React.createClass ({
 	},
 
 	render: function() {
-		var style = "height: 50px; width: 50px";
+		// var style = "height: 50px; width: 50px";
 		return (
 			<div className="{this.props.style} candidateTile text-center">
 				<div className="row">
 					<div className="col-xs-3">
-						<img className="img-rounded" style={{style}} src={"/assets/images/" + this.state.imageSrc} alt={this.state.name} />
+						<img className="img-rounded" src={"/assets/images/" + this.state.imageSrc} alt={this.state.name} />
 					</div>
 					<div className="col-xs-9 text-center">
 						<div className="row">

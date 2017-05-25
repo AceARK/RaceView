@@ -174,7 +174,7 @@ var NewsPanel = React.createClass ({
 			    		<img id="leadingCandidateImage" src={leadingCandidateSrc}/>
 			    	</div>
 			    	<div className="col-xs-9">
-			    		<h2>{this.state.currentNewsItem.headline}</h2>
+			    		<h2 className="newsHeadline">{this.state.currentNewsItem.headline}</h2>
 			    		<h5>{this.state.currentNewsItem.summary}</h5>
 			    		<h5 className="pull-right">- The Onion</h5>
 			    	</div>

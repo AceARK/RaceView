@@ -34,7 +34,7 @@ var ViewPanel = React.createClass ({
 	render: function() {
 		return (
 	      <div className="viewPanel">
-	      	<div className="row">
+	      	<div className="graphicalData row">
 	      		<div className="col-sm-7">
 	      			<ViewBar candidatesArray={this.state.candidatesArray}/>
 	      		</div>

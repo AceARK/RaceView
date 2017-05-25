@@ -105,10 +105,16 @@ body {
   	box-shadow: inset 0px 0px 30px 30px rgba(0,0,0,1);
   	border: 1px solid rgba(255,255,255,0.3);
 	margin: 5px;
+	height: 70px;
+	width: 50px;
 }
 
 .navbar {
-	background-image: url("../images/flag.jpg");
+	background: black url("../images/flag.jpg") no-repeat;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    /*background-size: 100% 100%;*/
 	color: white;
 }
 
@@ -211,4 +217,98 @@ h5 {
 .alert-danger {
 	margin-top: 20px;
 	border: 2px solid #A80001;
+}
+
+.alert-success {
+	border: 2px solid #418242;
+}
+
+@media (min-width: 1900px) {
+	
+	/* Tile style */
+
+	.candidateTile {
+		height: 105px;
+	}
+
+	.candidateTile p{
+		font-size: 18px;
+	}
+
+	.candidateTile h3 {
+		font-size: 27px;
+	}
+
+
+	.candidateTile img {
+		height: 85px;
+		width: 65px;
+	}
+
+	/* ViewPanel style */
+	
+	.viewPanel {
+		max-height: 830px;
+	}
+
+	.graphicalData {
+		max-height: 200px;
+	}
+
+	.newsPanel h5 {
+		font-size: 17px;
+	}
+
+	.newsHeadline {
+		font-size: 26px;
+		margin-bottom: 20px;
+	}
+
+	.newsPanel {
+		min-height: 200px;
+		margin-top: -10px;
+	}
+
+	#leadingCandidateImage {
+		height: 190px;
+		width: auto;
+		margin-left: 40px;
+	}
+
+	/* Menu bar style */
+	.navbar>.container-fluid .navbar-brand {
+		font-size: 24px;
+		margin-left: 10px;
+	}
+
+	.nav.navbar-nav.navbar-right a {
+		font-size: 20px;
+		margin-right: 20px;
+	}
+
+	.panel-title {
+		font-size: 18px;
+	}
+
+	label {
+		font-size: 18px;
+	}
+
+	.form-control {
+		font-size: 17px;
+		height: 50px;
+	}
+
+	.btn {
+		font-size: 18px;
+		height: 40px;
+	}
+
+	.alert-danger {
+		font-size: 16px;
+	}
+
+	.alert-success {
+		font-size: 16px;
+	}
 }

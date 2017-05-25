@@ -21,7 +21,7 @@ class Main extends React.Component {
 		return (
 			<div>
 				<nav className="navbar navbar-inverse">
-				  <div className="container">
+				  <div className="container-fluid">
 				    <div className="navbar-header">
 				      <a className="navbar-brand" href="/">RaceView</a>
 				      <h1 className="text-center">{this.state.headerTitle}</h1>
