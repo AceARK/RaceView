@@ -41,9 +41,9 @@ app.use(expressSession({
 // ----  For Demo purpose only ----//
 
 // Serving openvote page
-// app.get("/openvote",function(req, res) {
-// 	res.sendFile(path.join(__dirname, "/public/openvote.html"));
-// });
+app.get("/openvote",function(req, res) {
+	res.sendFile(path.join(__dirname, "/public/openvote.html"));
+});
 // ---- End: For Demo purpose only ----//
 
 // Serving static files
