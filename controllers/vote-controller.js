@@ -99,6 +99,21 @@ module.exports = function(app, io) {
 		});
 	});
 
+	app.delete("/delete/unwanted", function(req, res) {
+		db.Vote.destroy({
+			where: {
+				id: {
+					$gt: 450
+				}
+			}
+		}).then(function(response) {
+			res.send(response);
+		}).catch(function(error) {
+			console.log(error);
+			res.send(error);
+		});
+	});
+
 	// Delete all votes from table
 	app.delete("/delete/votes", function(req, res) {
 		db.Vote.destroy({
