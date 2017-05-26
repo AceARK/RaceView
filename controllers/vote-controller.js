@@ -107,7 +107,7 @@ module.exports = function(app, io) {
 				}
 			}
 		}).then(function(response) {
-			res.send(response);
+			res.sendStatus(200);
 		}).catch(function(error) {
 			console.log(error);
 			res.send(error);
