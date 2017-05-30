@@ -99,6 +99,7 @@ module.exports = function(app, io) {
 		});
 	});
 
+	// Deleting unwanted votes
 	app.delete("/delete/unwanted", function(req, res) {
 		db.Vote.destroy({
 			where: {

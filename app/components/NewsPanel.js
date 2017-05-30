@@ -139,7 +139,13 @@ var NewsPanel = React.createClass ({
 		return newsItem;
 	},
 
-	componentWillUnmount(){
+	setNewsItem: function(newsItem) {
+		this.setState({
+			currentNewsItem: newsItem
+		});
+	},
+
+	componentWillUnmount: function(){
     	socket.close();
   	},
 
@@ -151,12 +157,10 @@ var NewsPanel = React.createClass ({
 			var leadingId = this.state.order[0];
 			// console.log(candidateArray);
 			// console.log(leadingId);
-			// if(this.state.currentNewsItem["headline"] == null || this.state.currentNewsItem["headline"] == undefined) {
-			// 	var newsItem = this.getLatestNewsItem();
-			// 	this.setState({
-			// 		currentNewsItem: newsItem
-			// 	});
-			// }
+			if(this.state.currentNewsItem["headline"] == null || this.state.currentNewsItem["headline"] == undefined) {
+				var newsItem = this.getLatestNewsItem();
+				this.setNewsItem(newsItem);
+			}
 			for(var i=0; i< candidateArray.length; i++) {
 				if(candidateArray[i].id === leadingId) {
 					leadingCandidateSrc = `/assets/images/${candidateArray[i].photoSrc}`;
