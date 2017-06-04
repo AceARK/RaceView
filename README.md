@@ -30,4 +30,4 @@
 
 ----------------------
 
-Check out the [OpenVote URL](https://raceview.herokuapp.com/openvote) on your secondary device (with RaceView dashboard opened up on primary device) and vote randomly to watch the dashboard update and react on data change. 
+Use the [OpenVote URL](https://raceview.herokuapp.com/openvote) on your secondary device (with RaceView dashboard opened up on primary device) to vote randomly and watch the dashboard update and react on data change. 
